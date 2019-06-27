@@ -23,34 +23,42 @@ $(document).ready(function(){
 
 function sendBudget(){
     var x = new XMLHttpRequest();
-      x.onreadystatechange=function(){
-          if(this.readyState == 4 && this.status == 200){
-             clearAll();
-          }
-      }
-
+    x.onreadystatechange=function(){
+        if(this.readyState == 4 && (this.status == 200 || this.status == 201)){
+          clearAll();
+        } else {
+          showError(x.responseText);
+        }
+    }
 
     x.open('post', 'http://localhost:8080/budget');
-    x.setRequestHeader('Content-type', 'application/json')
+    x.setRequestHeader('Content-type', 'application/json');
     x.send(JSON.stringify(budget)); 
 }
 
+function showError(response){
+  var ops = document.getElementById('thanks');
+  ops.style.display = "block";
+  ops.innerHTML = response;
+}
+
+
+
 function clearAll(){
    Document.getElementById('ea-form-budget').reset();
-
 }
 
 showTab(currentTab);
 
 function showTab(n) {
-  var x = document.getElementsByClassName("step-tab");
-  x[n].style.display = "block";
+  var steptab = document.getElementsByClassName("step-tab");
+  steptab[n].style.display = "block";
   if (n == 0) {
     document.getElementById("prevBtn").style.display = "none";
   } else {
     document.getElementById("prevBtn").style.display = "inline";
   }
-  if (n == (x.length - 1)) {
+  if (n == (steptab.length - 1)) {
     document.getElementById("nextBtn").innerHTML = "Finalizar";
   } else {
     document.getElementById("nextBtn").innerHTML = "Próximo";
@@ -111,6 +119,8 @@ function findCep(){
             cepError.style.display = 'inline';
          } else {
              document.getElementById('budgetCity').value = cep.localidade;
+             budget.city = cep.localidade;
+             budget.state = cep.uf;
          }
       }
   }
