@@ -12,7 +12,7 @@ function wp_ea_bridge(){
 }
 
 function wp_ea_add_scripts(){
-    wp_enqueue_script( 'ea-bridge-step', plugin_dir_url( __FILE__ ) . 'js/step.js', array(), null, true );
+    wp_enqueue_script( 'ea-bridge-step', plugin_dir_url( __FILE__ ) . 'js/step.js', array('jquery'), null, true );
 }
 
 add_action( 'wp_enqueue_scripts', 'wp_ea_add_scripts' );
