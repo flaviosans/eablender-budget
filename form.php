@@ -1,36 +1,16 @@
 <?php $plugin_path = plugin_dir_url( __FILE__ )?>
 
-<!DOCTYPE html>
-<html>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
-<link href="step.css" rel="stylesheet">
 
-<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-  integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
-  integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 
-<body>
 
     <div id="thanks" style="display: none">
       <img class="img-fluid mx-auto d-block w3-animate-fading" src="<?php echo $plugin_path?>/img/resized/checked.png" alt="check-form"> <br>
       <h5>Obrigado!</h5>
       <p>Em breve um profissional entrará em contato com você!</p>
     </div>
-    <div id="ops" style="display: none">
-      Ops...
-      <p>
-        <div id="ops-msg"></div>
-      </p>
-    </div>
-
-
 
   <div class="container">
-    <h1 id="titulo">Preencha agora:</h1>
-    <div class="step-tab">
+    <div class="step-tab" >
       <div class="form-group">
         <label for="budgetZipCode" class="control-label required">Insira seu CEP, sem pontos nem traços:</label>
         <input onkeyup="findCep()" type="text" class="form-control" maxlength="8" id="budgetZipCode" required
@@ -54,8 +34,6 @@
           o orçamento se encaixa?</p>
       </div>
       <div class="container">
-        
-        
          <div class="row col-md-12 col-sm-12 col-12 w-auto">
               <div class="col-md-3 col-sm-6 col-6 imgBudget hover01" onclick="addCategory(1)">
                   <figure><img class="img-responsive" style="background-color: #0579ff" src="<?php echo $plugin_path?>/img/resized/construction.png">
@@ -74,9 +52,7 @@
                   </figure>Paisagismo e Jardinagem
                 </div>
           </div>
-
           <div class="row col-md-12 col-sm-12 col-12 w-auto">
-
               <div class="col-md-3 col-sm-6 col-6 imgBudget hover01" onclick="addCategory(5)">
                   <figure><img class="img-responsive" style="background-color: #0579ff" src="<?php echo $plugin_path?>/img/resized/lot.png"></figure>
                   Loteamento
@@ -93,11 +69,8 @@
                   <figure><img class="img-responsive" style="background-color: #0579ff" src="<?php echo $plugin_path?>/img/resized/paving.png"></figure>
                   Pavimentação
                 </div>
-
           </div>
-
           <div class="row col-md-12 col-sm-12 col-12 w-auto">
-
               <div class="col-md-3 col-sm-6 col-6 imgBudget hover01" onclick="addCategory(9)">
                   <figure><img class="img-responsive" style="background-color: #0579ff" src="<?php echo $plugin_path?>/img/resized/changes.png">
                   </figure>Mudanças
@@ -110,7 +83,6 @@
                   <figure><img class="img-responsive" style="background-color: #0579ff" src="<?php echo $plugin_path?>/img/resized/other.png"></figure>
                   Outros
                 </div>
-
           </div>          
       </div>
     </div>
@@ -193,7 +165,6 @@
               placeholder="Adicione os detalhes que você sente necessidade de explicar para o profissional. Quanto mais informações constar, mais rápido será o contato do profissional para te passar a melhor proposta de orçamento."></textarea>
           </div>
         </div>
-
         <div class="col-sm-12 col-md-6">
             <div class="form-group">
               <label for="hourBudget" class="control-label required"><strong>Melhor horário para contato:</strong>
@@ -225,7 +196,6 @@
                 </div>
               </div>
             </div>
-  
             <div class="form-group">
               <label for="personBudget" class="control-label required"><strong>O pedido é para:</strong></label>
               <hr style="margin-top: 0.4em;">
@@ -247,17 +217,10 @@
                 </div>
               </div>
             </div>
-
-
           </div>
       </div>
-
-
-      
-      
     </div>
     <div class="step-tab">
-        
       <div class="row">
         <div class="col-6 bc__separete-vertical">
           <label><strong>Contato</strong></label>
@@ -265,10 +228,8 @@
               <label for="nameBudget" class="control-label required">Nome e Sobrenome:</label>
               <input type="text" onblur="setName(this.value)" class="form-control" id="nameBudget">
             </div>
-  
             <div class="form-group">
               <label for="emailBudget" class="control-label required">E-mail:</label>
-  
               <div class="input-group">
                 <input type="email" onblur="setEmail(this.value)" class="form-control" id="emailBudget" autocomplete="off">
                 <span class="input-group-addon pd-10" placement="left" ngbTooltip="Clique aqui para trocar o email"
@@ -277,14 +238,12 @@
                 </span>
               </div>
             </div>
-  
             <div class="form-group">
               <label for="phoneBudget" class="control-label required">Telefone:</label>
               <input onblur="setPhone(this.value)" type="tel" class="form-control phone" id="phoneBudget" name="phoneBudget"
                  >
             </div>
           </div>
-
         <div class="col-6">
             <form id="estimatedPrice" class="form-check-inline" name="estimatedPrice">
               <div class="form-row">
@@ -332,20 +291,13 @@
               </div>
           </div>
       </div>
-        
-
     </div>
-  
-
-    
-    
     <div style="overflow:auto;">
       <div style="float:right;">
         <button type="button" id="prevBtn" onclick="nextPrev(-1)">Anterior</button>
         <button type="button" id="nextBtn" onclick="nextPrev(1)">Proximo</button>
       </div>
     </div>
-
     <div id="step" style="text-align:center;margin-top:40px;">
       <span  class="step"></span>
       <span  class="step"></span>
@@ -354,10 +306,3 @@
       <span  class="step"></span>
     </div>
   </div>
-
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.11/jquery.mask.min.js"></script>
-
-</body>
-
-</html>

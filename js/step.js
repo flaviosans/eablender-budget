@@ -7,7 +7,7 @@ budget.meta.userApp = new Object();
 budget.meta.questions = new Object();
 var currentTab = 0;
 
-JQuery(document).ready(function(){
+jQuery(document).ready(function(){
   var SPMaskBehavior = function (val) {
     return val.replace(/\D/g, '').length === 11 ? '(00) 00000-0000' : '(00) 0000-00009';
   },
@@ -17,7 +17,7 @@ JQuery(document).ready(function(){
       }
   };
 
-  JQuery('#phoneBudget').mask(SPMaskBehavior, spOptions);
+  jQuery('#phoneBudget').mask(SPMaskBehavior, spOptions);
 });
 
 
@@ -71,7 +71,7 @@ function nextPrev(n) {
   x[currentTab].style.display = "none";
   currentTab = currentTab + n;
   if (currentTab >= x.length){
-    JQuery('#phoneBudget').unmask();
+    jQuery('#phoneBudget').unmask();
     sendBudget();
     showThanks();
     return false;
