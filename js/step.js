@@ -31,7 +31,7 @@ function sendBudget(){
         }
     }
 
-    x.open('post', 'http://localhost:8080/budget');
+    x.open('post', 'https://gama.entendaantes.com.br/budget');
     x.setRequestHeader('Content-type', 'application/json');
     x.send(JSON.stringify(budget)); 
 }
