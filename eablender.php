@@ -6,12 +6,18 @@
  * Author: Flávio Santos, Gleydson Parpinelli, Jonas Gabriel
  */
 
+function get_string_from_path($path){
+	ob_start();
+	include(plugin_dir_path( __FILE__ ) .$path);
+	return ob_get_clean();
+}
+
 function eablender_budget(){
-    include_once plugin_dir_path( __FILE__ ) . 'form.php';
+	return get_string_from_path( 'form.php');
 }
 
 function eablender_image(){
-    include plugin_dir_path(__FILE__) . 'image.php';
+	return get_string_from_path( 'image.php');
 }
 
 function eablender_budget_scripts(){
