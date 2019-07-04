@@ -1,1 +1,0 @@
-<img src="https://aes-entenda-antes-arquivosresized.s3.amazonaws.com/2018/12/10/dd3c9afe-dd3e-4e17-93b0-9ee18acd8dce_Espelhos-novopiso-interiores-decoracao-com-espelhos-como-utilizar-01.png">
