@@ -3,8 +3,15 @@
 class EABlender_Budget{
 
 	public function __construct() {
+	    $bridge = null;
+	    if(class_exists('EABlender_API')){
+	        $bridge = EABlender_API::get_instance();
+        } else {
+	        echo "Não tem essa classe aí não parça";
+        }
 		add_action('wp_enqueue_scripts', array($this, 'eablender_budget_scripts') );
 		add_shortcode( 'eablender-budget', [$this, 'eablender_budget']);
+//		$bridge->call();
 	}
 
 	public function eablender_budget_scripts(){

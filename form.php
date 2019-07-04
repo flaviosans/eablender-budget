@@ -1,8 +1,5 @@
 <?php $plugin_path = plugin_dir_url( __FILE__ )?>
 
-
-
-
     <div id="thanks" style="display: none">
       <img class="img-fluid mx-auto d-block w3-animate-fading" src="<?php echo $plugin_path?>/img/resized/checked.png" alt="check-form"> <br>
       <h5>Obrigado!</h5>
