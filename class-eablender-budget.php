@@ -2,6 +2,8 @@
 
 class EABlender_Budget{
 
+	protected $api;
+
 	public function __construct() {
 	    $bridge = null;
 	    if(class_exists('EABlender_API')){
@@ -11,7 +13,9 @@ class EABlender_Budget{
         }
 		add_action('wp_enqueue_scripts', array($this, 'eablender_budget_scripts') );
 		add_shortcode( 'eablender-budget', [$this, 'eablender_budget']);
-//		$bridge->call();
+		if(class_exists('EABlender_API')){
+			$this->api = EABlender_API::get_instance();
+		}
 	}
 
 	public function eablender_budget_scripts(){
@@ -28,7 +32,7 @@ class EABlender_Budget{
 
 	function get_string_from_path($path){
 		ob_start();
-		include(plugin_dir_path( __FILE__ ) .$path);
+		include(plugin_dir_path( __FILE__ ) . $path);
 		return ob_get_clean();
 	}
 
