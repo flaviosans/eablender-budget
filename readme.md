@@ -80,8 +80,7 @@ O shortcode não pode aparecer duas ou mais vezes numa mesma página
 * O consumidor não pode avançar para a próxima etapa sem que tenha preenchido todos os campos da etapa atual.
 
 ## Erros esperados:
-* API do Entenda Antes inacessível
-  * O plugin deve retornar uma mensagem ao usuário dizendo que a API está inacessível
+* **API do Entenda Antes inacessível:** O plugin deve retornar uma mensagem ao usuário dizendo que a API está inacessível
 * Campos obrigatórios faltantes
   * O plugin deve voltar campo faltante e informar que ele é obrigatório
 * Outros erros encontrados devem ser anotados aqui, com suas (prováveis) soluções
