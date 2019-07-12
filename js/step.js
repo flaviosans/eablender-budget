@@ -20,7 +20,6 @@ jQuery(document).ready(function(){
   jQuery('#phoneBudget').mask(SPMaskBehavior, spOptions);
 });
 
-
 function sendBudget(){
     var x = new XMLHttpRequest();
     x.onreadystatechange=function(){
@@ -31,7 +30,7 @@ function sendBudget(){
         }
     }
 
-    x.open('post', 'https://gama.entendaantes.com.br/budget');
+    x.open('post', 'https://alpha.entendaantes.com.br:8443/budget');
     x.setRequestHeader('Content-type', 'application/json');
     x.send(JSON.stringify(budget)); 
 }
@@ -42,34 +41,33 @@ function showError(response){
   ops.innerHTML = response;
 }
 
-
-
 function clearAll(){
    Document.getElementById('ea-form-budget').reset();
 }
 
-showTab(currentTab);
+//showTab(currentTab);
 
-function showTab(n) {
-  var steptab = document.getElementsByClassName("step-tab");
-  steptab[n].style.display = "block";
-  if (n == 0) {
+function showTab(tabNumber, id) {
+
+  var steptab = document.getElementsByClassName("step-tab"+id);
+  steptab[tabNumber].style.display = "block";
+  if (tabNumber == 0) {
     document.getElementById("prevBtn").style.display = "none";
   } else {
     document.getElementById("prevBtn").style.display = "inline";
   }
-  if (n == (steptab.length - 1)) {
+  if (tabNumber == (steptab.length - 1)) {
     document.getElementById("nextBtn").innerHTML = "Finalizar";
   } else {
     document.getElementById("nextBtn").innerHTML = "Próximo";
   }
-  fixStepIndicator(n)
+  fixStepIndicator(tabNumber)
 }
 
-function nextPrev(n) {
-  var x = document.getElementsByClassName("step-tab");
+function nextPrev(tab, id) {
+  var x = document.getElementsByClassName("step-tab"+id);
   x[currentTab].style.display = "none";
-  currentTab = currentTab + n;
+  currentTab = currentTab + tab;
   if (currentTab >= x.length){
     jQuery('#phoneBudget').unmask();
     sendBudget();
@@ -77,7 +75,7 @@ function nextPrev(n) {
     return false;
   }
 
-showTab(currentTab);
+//showTab(currentTab);
 }
 
 function showThanks(){
@@ -93,28 +91,27 @@ function showThanks(){
   previous.style.display = "none";
   thanks.style.display = "block";
   thanks.style.zIndex = 1000;
-
 }
 
-function fixStepIndicator(n) {
-  var i, x = document.getElementsByClassName("step");
-  for (i = 0; i < x.length; i++) {
-    x[i].className = x[i].className.replace(" active", "");
+function fixStepIndicator(stepNumber, id) {
+  var i, stepIndicator = document.getElementsByClassName("step"+id);
+  for (i = 0; i < stepIndicator.length; i++) {
+    stepIndicator[i].className = stepIndicator[i].className.replace(" active", "");
   }
-  x[n].className += " active";
+  stepIndicator[stepNumber].className += " active";
 }
 
 function findCep(){
   var b = document.getElementById('budgetZipCode').value;
   var cepError = document.getElementById('cep-error');
   if(isNaN(b)){
-      
+
   }
-  var x = new XMLHttpRequest();
-  x.onreadystatechange=function(){
-      if(this.readyState == 4 && this.status == 200){
-          cepError.style.display = 'none';
-          var cep = JSON.parse(this.responseText);
+  var request = new XMLHttpRequest();
+  request.onreadystatechange=function(){
+      if(request.readyState == 4 && request.status == 200){
+         cepError.style.display = 'none';
+         var cep = JSON.parse(this.responseText);
          if(cep.erro == true){
             cepError.style.display = 'inline';
          } else {
@@ -127,8 +124,8 @@ function findCep(){
   if(b.length == 8){
     var rightCep = b.substring(0,5)+'-'+b.substring(5,8); 
     budget.zipCode = rightCep;
-    x.open('get', `https://viacep.com.br/ws/${rightCep}/json/`);
-    x.send();
+    request.open('get', `https://viacep.com.br/ws/${rightCep}/json/`);
+    request.send();
   }      
 }
 

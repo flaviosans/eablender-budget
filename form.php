@@ -1,4 +1,7 @@
-<?php $plugin_path = plugin_dir_url( __FILE__ )?>
+<?php 
+$id = rand(0,999);
+$plugin_path = plugin_dir_url( __FILE__ )
+?>
 
     <div id="thanks" style="display: none">
       <img class="img-fluid mx-auto d-block w3-animate-fading" src="<?php echo $plugin_path?>/img/resized/checked.png" alt="check-form"> <br>
@@ -7,7 +10,7 @@
     </div>
 
   <div class="container">
-    <div class="step-tab" >
+    <div class="step-tab-<?echo $id ?>" >
       <div class="form-group">
         <label for="budgetZipCode" class="control-label required">Insira seu CEP, sem pontos nem traços:</label>
         <input onkeyup="findCep()" type="text" class="form-control" maxlength="8" id="budgetZipCode" required
@@ -23,7 +26,7 @@
         <input type="text" onblur="setNeighborhood(this.value)" id="budgetNeighborhood" class="form-control" required />
       </div>
     </div>
-    <div class="step-tab">
+    <div class="step-tab-<?echo $id ?>">
       <div class="col-12">
         <p class="cfw__title text-center">
           Em qual
@@ -83,7 +86,7 @@
           </div>          
       </div>
     </div>
-    <div class="step-tab">
+    <div class="step-tab-<?echo $id ?>">
       <div class="row">
         <div class="col-sm-12 col-md-6 bc__separete-vertical">
           <p class="cfw__title" style="text-align: center;"> <strong>Qual o tipo de imóvel?</strong></p>
@@ -145,7 +148,7 @@
         </div>
       </div>
     </div>
-    <div class="step-tab">
+    <div class="step-tab-<?echo $id ?>">
       <div class="row">
         <div class="col-12">
           <p class="cfw__title"><strong>Adicione um título e descrição em seu pedido:</strong> </p>
@@ -217,7 +220,7 @@
           </div>
       </div>
     </div>
-    <div class="step-tab">
+    <div class="step-tab-<?echo $id ?>">
       <div class="row">
         <div class="col-6 bc__separete-vertical">
           <label><strong>Contato</strong></label>
@@ -291,15 +294,15 @@
     </div>
     <div style="overflow:auto;">
       <div style="float:right;">
-        <button type="button" id="prevBtn" onclick="nextPrev(-1)">Anterior</button>
-        <button type="button" id="nextBtn" onclick="nextPrev(1)">Proximo</button>
+        <button type="button" id="prevBtn" onclick="nextPrev(-1, <?echo $id ?>)">Anterior</button>
+        <button type="button" id="nextBtn" onclick="nextPrev(1, <?echo $id ?>)">Proximo</button>
       </div>
     </div>
     <div id="step" style="text-align:center;margin-top:40px;">
-      <span  class="step"></span>
-      <span  class="step"></span>
-      <span  class="step"></span>
-      <span  class="step"></span>
-      <span  class="step"></span>
+      <span  class="step-<?echo $id ?>"></span>
+      <span  class="step-<?echo $id ?>"></span>
+      <span  class="step-<?echo $id ?>"></span>
+      <span  class="step-<?echo $id ?>"></span>
+      <span  class="step-<?echo $id ?>"></span>
     </div>
   </div>
