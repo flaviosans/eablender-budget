@@ -26,6 +26,7 @@ function sendBudget() {
         }
     }
 
+    // request.open('post', 'https://alpha.entendaantes.com.br:8443/budget');
     request.open('post', 'http://localhost:8080/budget');
     request.setRequestHeader('Content-type', 'application/json');
     request.send(JSON.stringify(budget));
@@ -100,6 +101,7 @@ function findCep() {
                 cepError.style.display = 'inline';
             } else {
                 document.getElementById('budgetCity').value = cep.localidade;
+                setCity(cep);
             }
         }
     }
@@ -109,6 +111,12 @@ function findCep() {
         x.open('get', `https://viacep.com.br/ws/${rightCep}/json/`);
         x.send();
     }
+}
+
+function setCity(cep){
+    budget.city = cep.localidade;
+    budget.neighborhood = cep.bairro;
+    budget.state = cep.uf;
 }
 
 function addCategory(id) {
