@@ -143,6 +143,9 @@
     .button-step {
         margin-top: 3.5rem;
     }
+    label {
+        display: table-cell;
+    }
 </style>
 
 <body>
