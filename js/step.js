@@ -22,7 +22,7 @@ function sendBudget() {
         if (request.status === 201) {
             showThanks();
         } else {
-            //showError(x.responseText);
+            showError(request.responseText);
         }
     }
 
@@ -31,29 +31,31 @@ function sendBudget() {
     request.send(JSON.stringify(budget));
 }
 
+function showError(responseText){
+
+}
+
 showTab(currentTab);
 
-    function showTab(tabNumber) {
-        var stepTab = document.getElementsByClassName("step-tab");
-        stepTab[tabNumber].style.display = "block";
-        if (tabNumber === 0) {
-            document.getElementById("prevBtn").style.display = "none";
-        } else {
-            document.getElementById("prevBtn").style.display = "inline";
-        }
-        if (tabNumber === (stepTab.length - 1)) {
-            document.getElementById("nextBtn").innerHTML = "Finalizar";
-        } else {
-            document.getElementById("nextBtn").innerHTML = "PrÃ³ximo";
-        }
-        setStepIndicator(tabNumber)
+function showTab(tabNumber) {
+    var stepTab = document.getElementsByClassName("step-tab");
+    stepTab[tabNumber].style.display = "block";
+    if (tabNumber === 0) {
+        document.getElementById("prevBtn").style.display = "none";
+    } else {
+        document.getElementById("prevBtn").style.display = "inline";
     }
+    if (tabNumber === (stepTab.length - 2)) {
+        document.getElementById("nextBtn").innerHTML = "Finalizar";
+    }
+    setStepIndicator(tabNumber)
+}
 
-function navigate(step) {
+function eablenderBudgetNavigate(step) {
     var stepTabs = document.getElementsByClassName("step-tab");
     stepTabs[currentTab].style.display = "none";
     currentTab += step;
-    if (currentTab >= stepTabs.length) {
+    if (currentTab >= stepTabs.length - 1) {
         sendBudget();
         return false;
     }
@@ -62,7 +64,7 @@ function navigate(step) {
 }
 
 function showThanks() {
-    var thanks = document.getElementById("thanks");
+    var thanks = document.getElementsByClassName("thanks")[0];
     var next = document.getElementById("nextBtn");
     var previous = document.getElementById("prevBtn");
     var step = document.getElementById("step");
@@ -112,19 +114,19 @@ function findCep() {
 function addCategory(id) {
     budget.budgetCategory.id = id;
     budget.budgetSubCategory.id = 79;
-    navigate(1);
+    eablenderBudgetNavigate(1);
 }
 
 function setPropertyType(property_type) {
     budget.meta.questions.property_type = property_type;
     if (budget.meta.questions.start)
-        navigate(1);
+        eablenderBudgetNavigate(1);
 }
 
 function setStart(start) {
     budget.meta.questions.start = start;
     if (budget.meta.questions.property_type)
-        navigate(1);
+        eablenderBudgetNavigate(1);
 }
 
 function setBudgetTitle(bt) {
