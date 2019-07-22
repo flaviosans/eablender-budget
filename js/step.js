@@ -1,3 +1,4 @@
+
 var budget = new Object();
 budget.budgetCategory = new Object();
 budget.budgetSubCategory = new Object();
@@ -7,185 +8,165 @@ budget.meta.userApp = new Object();
 budget.meta.questions = new Object();
 var currentTab = 0;
 
-jQuery(document).ready(function(){
-  var SPMaskBehavior = function (val) {
-    return val.replace(/\D/g, '').length === 11 ? '(00) 00000-0000' : '(00) 0000-00009';
-  },
-  spOptions = {
-    onKeyPress: function(val, e, field, options) {
-        field.mask(SPMaskBehavior.apply({}, arguments), options);
-      }
-  };
+function maskPhone(phoneInput){
+    var phone = phoneInput.value;
+    phone = phone.replace(/\D/g, "")
+        .replace(/^(\d{2})(\d)/g, "($1) $2")
+        .replace(/(\d)(\d{4})$/, "$1-$2");
+    phoneInput.value = phone;
+}
 
-  jQuery('#phoneBudget').mask(SPMaskBehavior, spOptions);
-});
-
-function sendBudget(){
-    var x = new XMLHttpRequest();
-    x.onreadystatechange=function(){
-        if(this.readyState == 4 && (this.status == 200 || this.status == 201)){
-          clearAll();
+function sendBudget() {
+    var request = new XMLHttpRequest();
+    request.onreadystatechange = function () {
+        if (request.status === 201) {
+            showThanks();
         } else {
-          showError(x.responseText);
+            //showError(x.responseText);
         }
     }
 
-    x.open('post', 'https://alpha.entendaantes.com.br:8443/budget');
-    x.setRequestHeader('Content-type', 'application/json');
-    x.send(JSON.stringify(budget)); 
+    request.open('post', 'http://localhost:8080/budget');
+    request.setRequestHeader('Content-type', 'application/json');
+    request.send(JSON.stringify(budget));
 }
 
-function showError(response){
-  var ops = document.getElementById('thanks');
-  ops.style.display = "block";
-  ops.innerHTML = response;
+showTab(currentTab);
+
+    function showTab(tabNumber) {
+        var stepTab = document.getElementsByClassName("step-tab");
+        stepTab[tabNumber].style.display = "block";
+        if (tabNumber === 0) {
+            document.getElementById("prevBtn").style.display = "none";
+        } else {
+            document.getElementById("prevBtn").style.display = "inline";
+        }
+        if (tabNumber === (stepTab.length - 1)) {
+            document.getElementById("nextBtn").innerHTML = "Finalizar";
+        } else {
+            document.getElementById("nextBtn").innerHTML = "PrÃ³ximo";
+        }
+        setStepIndicator(tabNumber)
+    }
+
+function navigate(step) {
+    var stepTabs = document.getElementsByClassName("step-tab");
+    stepTabs[currentTab].style.display = "none";
+    currentTab += step;
+    if (currentTab >= stepTabs.length) {
+        sendBudget();
+        return false;
+    }
+
+    showTab(currentTab);
 }
 
-function clearAll(){
-   Document.getElementById('ea-form-budget').reset();
+function showThanks() {
+    var thanks = document.getElementById("thanks");
+    var next = document.getElementById("nextBtn");
+    var previous = document.getElementById("prevBtn");
+    var step = document.getElementById("step");
+
+    step.style.display = "none";
+    next.style.display = "none";
+    previous.style.display = "none";
+    thanks.style.display = "block";
+    thanks.style.zIndex = '99999';
+
 }
 
-//showTab(currentTab);
-
-function showTab(tabNumber, id) {
-
-  var steptab = document.getElementsByClassName("step-tab"+id);
-  steptab[tabNumber].style.display = "block";
-  if (tabNumber == 0) {
-    document.getElementById("prevBtn").style.display = "none";
-  } else {
-    document.getElementById("prevBtn").style.display = "inline";
-  }
-  if (tabNumber == (steptab.length - 1)) {
-    document.getElementById("nextBtn").innerHTML = "Finalizar";
-  } else {
-    document.getElementById("nextBtn").innerHTML = "Próximo";
-  }
-  fixStepIndicator(tabNumber)
+function setStepIndicator(stepIndicator) {
+    var i, step = document.getElementsByClassName("step");
+    for (i = 0; i < step.length; i++) {
+        step[i].className = step[i].className.replace(" active", "");
+    }
+    step[stepIndicator].className += " active";
 }
 
-function nextPrev(tab, id) {
-  var x = document.getElementsByClassName("step-tab"+id);
-  x[currentTab].style.display = "none";
-  currentTab = currentTab + tab;
-  if (currentTab >= x.length){
-    jQuery('#phoneBudget').unmask();
-    sendBudget();
-    showThanks();
-    return false;
-  }
+function findCep() {
+    var b = document.getElementById('budgetZipCode').value;
+    var cepError = document.getElementById('cep-error');
+    if (isNaN(b)) {
 
-//showTab(currentTab);
+    }
+    var x = new XMLHttpRequest();
+    x.onreadystatechange = function () {
+        if (x.readyState == 4 && x.status == 200) {
+            cepError.style.display = 'none';
+            var cep = JSON.parse(this.responseText);
+            if (cep.erro == true) {
+                cepError.style.display = 'inline';
+            } else {
+                document.getElementById('budgetCity').value = cep.localidade;
+            }
+        }
+    }
+    if (b.length == 8) {
+        var rightCep = b.substring(0, 5) + '-' + b.substring(5, 8);
+        budget.zipCode = rightCep;
+        x.open('get', `https://viacep.com.br/ws/${rightCep}/json/`);
+        x.send();
+    }
 }
 
-function showThanks(){
-  var thanks = document.getElementById("thanks");
-  var next = document.getElementById("nextBtn");
-  var previous = document.getElementById("prevBtn");
-  var title = document.getElementById("titulo");
-  var step = document.getElementById("step");
-
-  step.style.display = "none";
-  title.style.display = "none";
-  next.style.display = "none";
-  previous.style.display = "none";
-  thanks.style.display = "block";
-  thanks.style.zIndex = 1000;
-}
-
-function fixStepIndicator(stepNumber, id) {
-  var i, stepIndicator = document.getElementsByClassName("step"+id);
-  for (i = 0; i < stepIndicator.length; i++) {
-    stepIndicator[i].className = stepIndicator[i].className.replace(" active", "");
-  }
-  stepIndicator[stepNumber].className += " active";
-}
-
-function findCep(){
-  var b = document.getElementById('budgetZipCode').value;
-  var cepError = document.getElementById('cep-error');
-  if(isNaN(b)){
-
-  }
-  var request = new XMLHttpRequest();
-  request.onreadystatechange=function(){
-      if(request.readyState == 4 && request.status == 200){
-         cepError.style.display = 'none';
-         var cep = JSON.parse(this.responseText);
-         if(cep.erro == true){
-            cepError.style.display = 'inline';
-         } else {
-             document.getElementById('budgetCity').value = cep.localidade;
-             budget.city = cep.localidade;
-             budget.state = cep.uf;
-         }
-      }
-  }
-  if(b.length == 8){
-    var rightCep = b.substring(0,5)+'-'+b.substring(5,8); 
-    budget.zipCode = rightCep;
-    request.open('get', `https://viacep.com.br/ws/${rightCep}/json/`);
-    request.send();
-  }      
-}
-
-function addCategory(id){
+function addCategory(id) {
     budget.budgetCategory.id = id;
     budget.budgetSubCategory.id = 79;
-    nextPrev(1);
+    navigate(1);
 }
 
-function setPropertyType(property_type){
+function setPropertyType(property_type) {
     budget.meta.questions.property_type = property_type;
-    if(budget.meta.questions.start)
-        nextPrev(1);
+    if (budget.meta.questions.start)
+        navigate(1);
 }
 
-function setStart(start){
+function setStart(start) {
     budget.meta.questions.start = start;
-    if(budget.meta.questions.property_type)
-        nextPrev(1);
+    if (budget.meta.questions.property_type)
+        navigate(1);
 }
 
-function setBudgetTitle(bt){
+function setBudgetTitle(bt) {
     budget.title = bt;
 }
 
-function setDescription(d){
+function setDescription(d) {
     budget.description = d;
 }
 
-function setName(n){
+function setName(n) {
     budget.meta.userApp.name = n;
     budget.userApp.name = n;
 }
 
-function setEmail(e){
+function setEmail(e) {
     budget.meta.userApp.email = e;
     budget.userApp.email = e;
 }
 
-function setPhone(p){
+function setPhone(p) {
+    p = p.replace(/[^\d]+/g, '');
     budget.meta.userApp.phone = p;
     budget.userApp.phone = p;
 }
 
-function setNeighborhood(n){
+function setNeighborhood(n) {
     budget.neighborhood = n;
 }
 
-function setPersonType(pt){
+function setPersonType(pt) {
     budget.meta.questions.person_type = pt;
 }
 
-function setContactHour(ch){
+function setContactHour(ch) {
     budget.meta.questions.contact_hour = ch;
 }
 
-function setEstimatedPrice(ep){
+function setEstimatedPrice(ep) {
     budget.estimatedPrice = ep;
 }
 
-function setInterest(interest){
+function setInterest(interest) {
     budget.meta.interest = interest;
 }
