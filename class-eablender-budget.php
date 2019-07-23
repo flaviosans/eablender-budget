@@ -5,17 +5,21 @@ class EABlender_Budget{
 	protected $api;
 
 	public function __construct() {
-	    $bridge = null;
 	    if(class_exists('EABlender_API')){
-	        $bridge = EABlender_API::get_instance();
+		    $this->api = EABlender_API::get_instance();
         } else {
-	        echo "Não tem essa classe aí não parça";
+		    add_action( 'admin_notices', array($this, 'eablender_budget_api_error'));
         }
 		add_action('wp_enqueue_scripts', array($this, 'eablender_budget_scripts') );
 		add_shortcode( 'eablender-budget', [$this, 'eablender_budget']);
-		if(class_exists('EABlender_API')){
-			$this->api = EABlender_API::get_instance();
-		}
+	}
+
+	private function eablender_budget_api_error(){
+		?>
+		<div class="notice notice-warning">
+			<p><?php _e( 'EABlender Pages: EABlender API parece não estar presente' ); ?></p>
+		</div>
+		<?php
 	}
 
 	public function eablender_budget_scripts(){
