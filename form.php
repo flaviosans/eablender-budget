@@ -1,13 +1,7 @@
-<?php 
-    $id = rand(0,999);
-    $plugin_path = plugin_dir_url( __FILE__ )
+<?php
+$id = rand(0,999);
+$plugin_path = plugin_dir_url( __FILE__ )
 ?>
-
-<!DOCTYPE html>
-<html>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
-<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 
 <style>
     @media (max-width: 768px) {
@@ -132,11 +126,11 @@
         -webkit-transform: scale(1.1);
         transform: scale(1.1);
     }
-    #thanks img {
+    .thanks img {
         padding-top: 2rem;
         width: 10%;
     }
-    #thanks h5,
+    .thanks h5,
     p {
         text-align: center;
     }
@@ -152,15 +146,7 @@
 
 </style>
 
-<body>
 
-<div id="thanks" style="display: none">
-    <img class="img-fluid mx-auto d-block w3-animate-fading"
-         src="https://entendaantes.com.br/wp-content/uploads/checked.png" alt="check-form"> <br>
-    <h5>Obrigado!</h5>
-    <p>Em breve um profissional entrará em contato com você!</p>
-
-</div>
 
 <div class="container">
     <div class="step-tab">
@@ -240,18 +226,7 @@
                 </div>
             </form>
         </div>
-
-
-
-
     </div>
-</div>
-
-<div class="container">
-
-
-
-
     <div class="step-tab">
         <div class="row">
             <div class="col-sm-12 col-md-6 bc__separete-vertical">
@@ -388,12 +363,11 @@
 
     </div>
     <div class="step-tab">
-
         <div class="row">
             <div class="col-12 bc__separete-vertical">
                 <label><strong>Contato</strong></label>
                 <div class="form-group">
-                    <label for="nameBudget" class="control-label required">Nome e Sobrenome:</label>
+                    <label for="nameBudget" class="control-label required">Nome completo:</label>
                     <input type="text" onblur="setName(this.value)" class="form-control" id="nameBudget">
                 </div>
 
@@ -487,17 +461,18 @@
 
 
     </div>
-
-
-
-
+    <div class="step-tab thanks">
+        <img class="img-fluid mx-auto d-block w3-animate-fading"
+             src="<?php echo $plugin_path ?>img/checked.png" alt="check-form"> <br>
+        <h5>Obrigado!</h5>
+        <p>Em breve um profissional entrará em contato com você!</p>
+    </div>
     <div style="overflow:auto;">
         <div style="float:right;">
-            <button type="button" id="prevBtn" class="button-step" onclick="navigate(-1)">Anterior</button>
-            <button type="button" id="nextBtn" class="button-step" onclick="navigate(1)">Proximo</button>
+            <button type="button" id="prevBtn" class="button-step" onclick="eablenderBudgetNavigate(-1)">Anterior</button>
+            <button type="button" id="nextBtn" class="button-step" onclick="eablenderBudgetNavigate(1)">Próximo</button>
         </div>
     </div>
-
     <div id="step" style="text-align:center;margin-top:40px;">
         <span class="step"></span>
         <span class="step"></span>
@@ -506,6 +481,3 @@
         <span class="step"></span>
     </div>
 </div>
-</body>
-
-</html>
