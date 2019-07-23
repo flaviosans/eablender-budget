@@ -10,23 +10,12 @@ $plugin_path = plugin_dir_url( __FILE__ )
             max-width: 100%;
         }
     }
-    textarea {
+    .eablender-textarea {
         width: 100%;
         min-height: 150px;
     }
     * {
         box-sizing: border-box;
-    }
-    body {
-        font-family: Raleway;
-        background-color: #f1f1f1;
-    }
-    #regForm {
-        background-color: #ffffff;
-        margin: 100px auto;
-        padding: 40px;
-        width: 70%;
-        min-width: 300px;
     }
     input {
         padding: 10px;
@@ -79,24 +68,9 @@ $plugin_path = plugin_dir_url( __FILE__ )
     #cep-error {
         display: none;
     }
-    .imgBudget {
-        margin-bottom: 20px;
-    }
     @media only screen and (max-width: 989px) {
         div.radio {
             width: 100%;
-        }
-    }
-    .grid {
-        width: auto;
-    }
-    @media only screen and (max-width: 575px) {
-        #grid {
-            width: auto;
-        }
-        figure img {
-            width: 70px;
-            height: 75%;
         }
     }
     @media only screen and (max-width: 766px) {
@@ -115,16 +89,6 @@ $plugin_path = plugin_dir_url( __FILE__ )
     input[type="radio"] {
         margin-top: -1px;
         vertical-align: middle;
-    }
-    .hover01 figure img {
-        -webkit-transform: scale(1);
-        transform: scale(1);
-        -webkit-transition: .3s ease-in-out;
-        transition: .3s ease-in-out;
-    }
-    .hover01 figure:hover img {
-        -webkit-transform: scale(1.1);
-        transform: scale(1.1);
     }
     .thanks img {
         padding-top: 2rem;
@@ -145,7 +109,6 @@ $plugin_path = plugin_dir_url( __FILE__ )
     }
 
 </style>
-
 
 
 <div class="container">
@@ -191,8 +154,8 @@ $plugin_path = plugin_dir_url( __FILE__ )
                         </div>
                         <div class="radio">
                             <label><input type="radio" name="optradio" onclick="addCategory(4)">Paisagismo e
-                                Jardinagem
-                        </div></label>
+                                Jardinagem</label>
+                        </div>
 
                         <div class="radio">
                             <label><input type="radio" name="optradio"
@@ -297,7 +260,7 @@ $plugin_path = plugin_dir_url( __FILE__ )
                 </div>
                 <div class="form-group">
                     <label for="descriptionBudget" class="control-label required">Descrição:</label>
-                    <textarea onblur="setDescription(this.value)" id="descriptionBudget" class="form-control" rows="7"
+                    <textarea onblur="setDescription(this.value)" id="descriptionBudget" class="form-control eablender-textarea" rows="7"
                               placeholder="Adicione os detalhes que você sente necessidade de explicar para o profissional. Quanto mais informações constar, mais rápido será o contato do profissional para te passar a melhor proposta de orçamento."></textarea>
                 </div>
             </div>

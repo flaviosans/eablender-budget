@@ -1,7 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="e1c55637-8924-4cc5-9ca0-716c7a166e34" name="Default Changelist" comment="" />
+    <list default="true" id="e1c55637-8924-4cc5-9ca0-716c7a166e34" name="Default Changelist" comment=":pencil2: Atualiza a branch jonas">
+      <change afterPath="$PROJECT_DIR$/.idea/eablender-budget.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/form.php" beforeDir="false" afterPath="$PROJECT_DIR$/form.php" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -14,24 +22,12 @@
     </execution>
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+    <leaf>
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/form.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-306">
-              <caret line="15" column="13" selection-start-line="15" selection-start-column="13" selection-end-line="15" selection-end-column="13" />
-              <folding>
-                <element signature="n#style#0;n#div#0;n#!!top" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/js/step.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1105">
-              <caret line="65" column="21" selection-start-line="65" selection-start-column="21" selection-end-line="65" selection-end-column="21" />
+            <state relative-caret-position="190">
+              <caret line="32" column="4" selection-start-line="32" selection-start-column="4" selection-end-line="32" selection-end-column="4" />
             </state>
           </provider>
         </entry>
@@ -43,31 +39,39 @@
       <find>jque</find>
       <find>JQu</find>
       <find>step-tab</find>
+      <find>body</find>
+      <find>regForm</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="master" />
+      </map>
+    </option>
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/js/step.js" />
-        <option value="$PROJECT_DIR$/form.php" />
         <option value="$PROJECT_DIR$/wp-ea-bridge.php" />
         <option value="$PROJECT_DIR$/plain.php" />
+        <option value="$PROJECT_DIR$/form.php" />
       </list>
     </option>
   </component>
   <component name="PhpServers">
     <servers />
   </component>
+  <component name="PhpWorkspaceProjectConfiguration" interpreter_name="PHP 7.3" />
   <component name="ProjectConfigurationFiles">
     <option name="files">
       <list>
-        <option value="$PROJECT_DIR$/.idea/wp-ea-bridge.iml" />
         <option value="$PROJECT_DIR$/.idea/misc.xml" />
         <option value="$PROJECT_DIR$/.idea/vcs.xml" />
         <option value="$PROJECT_DIR$/.idea/modules.xml" />
+        <option value="$PROJECT_DIR$/.idea/php.xml" />
       </list>
     </option>
   </component>
@@ -87,8 +91,8 @@
         <subPane>
           <expand>
             <path>
-              <item name="eablender" type="b2602c69:ProjectViewProjectNode" />
-              <item name="eablender" type="462c0819:PsiDirectoryNode" />
+              <item name="eablender-budget" type="b2602c69:ProjectViewProjectNode" />
+              <item name="eablender-budget" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -97,11 +101,13 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../.." />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="settings.editor.selected.configurable" value="reference.settingsdialog.IDE.editor.colors.Color Scheme Font" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -127,18 +133,25 @@
       <updated>1561722675377</updated>
       <workItem from="1561722677798" duration="11749000" />
       <workItem from="1562173173355" duration="823000" />
+      <workItem from="1563885340418" duration="73000" />
+      <workItem from="1563885432454" duration="95000" />
+      <workItem from="1563885543994" duration="390000" />
+      <workItem from="1563885951684" duration="1739000" />
+      <workItem from="1563888314196" duration="307000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="12572000" />
+    <option name="totallyTimeSpent" value="15176000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
+    <frame x="-8" y="-8" width="2576" height="1056" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.16641453" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.16362192" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
+      <window_info active="true" anchor="bottom" id="Messages" visible="true" weight="0.32900432" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
       <window_info anchor="bottom" id="Run" order="2" />
@@ -148,9 +161,10 @@
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Database Changes" order="8" />
-      <window_info anchor="bottom" id="Version Control" order="9" weight="0.3289689" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="10" visible="true" weight="0.3289689" />
+      <window_info anchor="bottom" id="Version Control" order="9" weight="0.32792208" />
+      <window_info anchor="bottom" id="Terminal" order="10" weight="0.32792208" />
       <window_info anchor="bottom" id="Event Log" order="11" side_tool="true" />
+      <window_info anchor="bottom" id="PHP-CGI Server" order="12" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -160,23 +174,24 @@
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
   </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value=":pencil2: Atualiza a branch jonas" />
+    <option name="LAST_COMMIT_MESSAGE" value=":pencil2: Atualiza a branch jonas" />
+  </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/plain.php" />
     <entry file="file://$PROJECT_DIR$/wp-ea-bridge.php" />
-    <entry file="file://$PROJECT_DIR$/form.php">
+    <entry file="file://$PROJECT_DIR$/js/step.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-306">
-          <caret line="15" column="13" selection-start-line="15" selection-start-column="13" selection-end-line="15" selection-end-column="13" />
-          <folding>
-            <element signature="n#style#0;n#div#0;n#!!top" expanded="true" />
-          </folding>
+        <state relative-caret-position="840">
+          <caret line="68" column="21" selection-start-line="68" selection-start-column="21" selection-end-line="68" selection-end-column="21" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/js/step.js">
+    <entry file="file://$PROJECT_DIR$/form.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1105">
-          <caret line="65" column="21" selection-start-line="65" selection-start-column="21" selection-end-line="65" selection-end-column="21" />
+        <state relative-caret-position="190">
+          <caret line="32" column="4" selection-start-line="32" selection-start-column="4" selection-end-line="32" selection-end-column="4" />
         </state>
       </provider>
     </entry>
