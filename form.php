@@ -137,6 +137,13 @@ $plugin_path = plugin_dir_url( __FILE__ )
     .button-step {
         margin-top: 3.5rem;
     }
+    label {
+        display: table;
+    }
+    .error {
+        border: 2px solid red;
+    }
+
 </style>
 
 
