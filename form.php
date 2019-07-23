@@ -144,7 +144,7 @@
         margin-top: 3.5rem;
     }
     label {
-        display: table-cell;
+        display: table;
     }
 </style>
 
