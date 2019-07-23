@@ -146,6 +146,10 @@
     label {
         display: table;
     }
+    .error {
+        border: 2px solid red;
+    }
+
 </style>
 
 <body>
