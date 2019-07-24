@@ -115,7 +115,6 @@ $plugin_path = plugin_dir_url(__FILE__)
 
 </style>
 
-
 <div class="container">
     <div class="step-tab w3-animate-opacity">
         <div class="form-group">
