@@ -1,2 +1,4 @@
-wp-ea-bridge.zip
-.idea/
+.attach*
+.vscode
+.idea
+

@@ -193,7 +193,6 @@ $plugin_path = plugin_dir_url( __FILE__ )
                             <label><input type="radio" name="optradio" onclick="addCategory(4)">Paisagismo e
                                 Jardinagem
                         </div></label>
-
                         <div class="radio">
                             <label><input type="radio" name="optradio"
                                           onclick="addCategory(5)">Loteamento</label>
@@ -202,7 +201,6 @@ $plugin_path = plugin_dir_url( __FILE__ )
                             <label><input type="radio" name="optradio" onclick="addCategory(6)">Projetos em
                                 geral</label>
                         </div>
-
                         <div class="radio">
                             <label><input type="radio" name="optradio" onclick="addCategory(7)">Instalações e
                                 serviços</label>
@@ -221,7 +219,6 @@ $plugin_path = plugin_dir_url( __FILE__ )
                         <div class="radio">
                             <label><input type="radio" name="optradio" onclick="addCategory(11)">Outros</label>
                         </div>
-
                     </div>
                 </div>
             </form>
@@ -260,19 +257,16 @@ $plugin_path = plugin_dir_url( __FILE__ )
                     <div class="radio radiofill radio-primary centralizado">
                         <label class="verticalRadio">
                             <input type="radio" onclick="setStart('afap')" name="startBudget" value="afap">
-
                             O mais rápido possível
                         </label>
                         <label class="verticalRadio">
                             <input type="radio" onclick="setStart('from_1_to_3_months')" name="startBudget"
                                    value="from_1_to_3_months">
-
                             De 1 a 3 meses
                         </label>
                         <label class="verticalRadio">
                             <input type="radio" onclick="setStart('more_than_3_months')" name="startBudget"
                                    value="more_than_3_months">
-
                             Mais de 3 meses
                         </label>
                         <label class="verticalRadio">
@@ -333,7 +327,6 @@ $plugin_path = plugin_dir_url( __FILE__ )
                     </div>
                 </div>
             </div>
-
             <div class="col-md-6">
                 <div class="form-group">
                     <label for="personBudget" class="control-label required"><strong>O pedido é para:</strong></label>
@@ -356,11 +349,6 @@ $plugin_path = plugin_dir_url( __FILE__ )
                 </div>
             </div>
         </div>
-
-
-
-
-
     </div>
     <div class="step-tab">
         <div class="row">
@@ -370,10 +358,8 @@ $plugin_path = plugin_dir_url( __FILE__ )
                     <label for="nameBudget" class="control-label required">Nome completo:</label>
                     <input type="text" onblur="setName(this.value)" class="form-control" id="nameBudget">
                 </div>
-
                 <div class="form-group">
                     <label for="emailBudget" class="control-label required">E-mail:</label>
-
                     <div class="input-group">
                         <input type="email" onblur="setEmail(this.value)" class="form-control" id="emailBudget"
                                autocomplete="off">
@@ -384,16 +370,13 @@ $plugin_path = plugin_dir_url( __FILE__ )
                         </span>
                     </div>
                 </div>
-
                 <div class="form-group">
                     <label for="phoneBudget" class="control-label required">Telefone:</label>
                     <input onblur="setPhone(this.value)" onkeyup="maskPhone(this)" type="tel" class="form-control phone" id="phoneBudget"
                            name="phoneBudget">
                 </div>
             </div>
-
             <hr>
-
             <div class="form-group col-12" style="padding-top: 1em;">
                 <div class="row">
                     <div class="col-12">
@@ -411,10 +394,8 @@ $plugin_path = plugin_dir_url( __FILE__ )
                         </select>
                     </div>
                 </div>
-
                 <div class="row">
                     <div class="col-12">
-
                         <form id="estimatedPrice">
                             <hr style="padding: 5px 0px 5px 0px">
                             <label> <strong>Estimativa de investimento total na obra:</strong></label>
@@ -447,19 +428,11 @@ $plugin_path = plugin_dir_url( __FILE__ )
                                     Mais de R$80.000,00
                                 </label>
                             </div>
-
-
                         </form>
                     </div>
-
                 </div>
-
-
             </div>
-
         </div>
-
-
     </div>
     <div class="step-tab thanks">
         <img class="img-fluid mx-auto d-block w3-animate-fading"
