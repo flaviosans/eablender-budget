@@ -112,14 +112,16 @@ $plugin_path = plugin_dir_url( __FILE__ )
         display: none;
         border: 2px solid red;
     }
+    .eablender-icon {
+        color: #ff7700;
+    }
 
 </style>
 
 <div class="container">
     <div class="step-tab w3-animate-opacity">
         <div class="form-group">
-            <label for="budgetZipCode" class="control-label required"><i class="fas fa-map-marked-alt"
-                                                                         style="color: #ff7700">&nbsp;</i>Insira seu
+            <label for="budgetZipCode" class="control-label required"><i class="fas fa-map-marked-alt eablender-icon">&nbsp;</i>Insira seu
                 CEP, sem pontos nem traços:
                 <span id="cep-error" style="font-size: 14px"
                       class="text-danger m-t-5">&nbsp;Cep Inválido!</span></label>
@@ -128,7 +130,7 @@ $plugin_path = plugin_dir_url( __FILE__ )
                    style="width: 100%" minlength="8"/>
 
             <div class="form-group">
-                <label for="budgetCity" class="control-label"><i class="fas fa-city" style="color: #ff7700">&nbsp;</i>Cidade
+                <label for="budgetCity" class="control-label"><i class="fas fa-city eablender-icon">&nbsp;</i>Cidade
                     e Estado:</label>
                 <input type="text" id="budgetCity" class="form-control eablender-input" readonly/>
             </div>
@@ -266,8 +268,7 @@ $plugin_path = plugin_dir_url( __FILE__ )
             </div>
             <div class="col-md-12">
                 <div class="form-group">
-                    <label for="titleBudget" class="control-label required"> <strong><i class="far fa-edit"
-                                                                                        style="color: #ff7700;">&nbsp;</i>Título:</strong></label>
+                    <label for="titleBudget" class="control-label required"> <strong><i class="far fa-edit eablender-icon eablender-icon">&nbsp;</i>Título:</strong></label>
                     <span style="font-size: 14px" class="text-danger m-t-5 error">&nbsp;Título muito curto, por favor descreva melhor!</span>
                     <input id="titleBudget" onblur="setBudgetTitle(this.value)" type="text"
                            class="form-control eablender-input"
@@ -275,8 +276,7 @@ $plugin_path = plugin_dir_url( __FILE__ )
                            minlength="1">
                 </div>
                 <div class="form-group">
-                    <label for="descriptionBudget" class="control-label required"><i class="far fa-comments"
-                                                                                     style="color: #ff7700">&nbsp;</i>Descrição:
+                    <label for="descriptionBudget" class="control-label required"><i class="far fa-comments eablender-icon eablender-icon">&nbsp;</i>Descrição:
                         <span style="font-size: 14px"
                               class="text-danger m-t-5 error">&nbsp;Descrição muito curta</span>
                     </label>
@@ -348,8 +348,7 @@ $plugin_path = plugin_dir_url( __FILE__ )
             <div class="col-12 bc__separete-vertical">
                 <label><strong>Contato</strong></label>
                 <div class="form-group">
-                    <label for="nameBudget" class="control-label required"><i class="fas fa-user-edit"
-                                                                              style="color: #ff7700">&nbsp;</i>Nome
+                    <label for="nameBudget" class="control-label required"><i class="fas fa-user-edit eablender-icon">&nbsp;</i>Nome
                         completo: <span style="font-size: 14px"
                                         class="text-danger m-t-5 error">&nbsp;Nome precisa ter no minimo 5 caracteres</span>
                     </label>
@@ -358,12 +357,11 @@ $plugin_path = plugin_dir_url( __FILE__ )
                 </div>
 
                 <div class="form-group">
-                    <label for="emailBudget" class="control-label required"><i class="far fa-envelope"
-                                                                               style="color: #ff7700;">&nbsp;</i>E-mail:<span style="font-size: 14px"
+                    <label for="emailBudget" class="control-label required"><i class="far fa-envelope eablender-icon">&nbsp;</i>E-mail:<span style="font-size: 14px"
                                                                                                                               class="text-danger m-t-5 error">&nbsp;Email inválido</span></label>
 
                     <div class="input-group">
-                        <input type="email" onblur="setEmail(this.value)" class="form-control eablender-input"
+                        <input type="email" onblur="setEmail(this)" class="form-control eablender-input error-email"
                                id="emailBudget"
                                autocomplete="off">
                         <span class="input-group-addon pd-10">
@@ -373,8 +371,8 @@ $plugin_path = plugin_dir_url( __FILE__ )
                 </div>
 
                 <div class="form-group">
-                    <label for="phoneBudget" class="control-label required"><i class="fas fa-phone"
-                                                                               style="color: #ff7700">&nbsp;</i><span style="font-size: 14px"
+                    <label for="phoneBudget" class="control-label required"><i class="fas fa-phone eablender-icon"
+                                                                                >&nbsp;</i><span style="font-size: 14px"
                                                                                                                       class="text-danger m-t-5 error">&nbsp;Campo obrigatório!</span>Telefone:</label>
                     <input onblur="setPhone(this.value)" onkeyup="maskPhone(this)" type="tel"
                            class="form-control phone eablender-input" id="phoneBudget"
