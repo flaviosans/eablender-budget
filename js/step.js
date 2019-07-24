@@ -11,9 +11,18 @@ var currentTab = 0;
 
 function maskPhone(phoneInput){
     var phone = phoneInput.value;
+    if (phone.length > 15) {
+        phone = phone.substr(0, 15);
+        if (phone.substr(5,1) != 9){
+            phone = '';
+            alert('O telefone não é celular!');
+        }
+        //alert('O telefone é inválido!');
+    } else {
     phone = phone.replace(/\D/g, "")
         .replace(/^(\d{2})(\d)/g, "($1) $2")
         .replace(/(\d)(\d{4})$/, "$1-$2");
+    }
     phoneInput.value = phone;
 }
 
@@ -84,25 +93,25 @@ function budgetIsValid() {
     switch (currentTab) {
         case 0 :
             if (isEmpty(budget.zipCode)) {
-                alert("cep inválido");
+                alert("Cep inválido, por favor verifique");
                 valid = false;
             }
             break;
         case 1:
             if (isEmpty(budget.budgetCategory.id)) {
-                alert("categoria");
+                alert("Por favor, selecione uma categoria");
                 valid = false;
             }
             break;
         case 2:
             if (isEmpty(budget.meta) || isEmpty(budget.meta.questions.property_type) || isEmpty(budget.meta.questions.start)) {
-                alert("property type");
+                alert("Por favor, preencha os campos obrigatórios");
                 valid = false;
             }
             break;
         case 3:
-            if(isEmpty(budget.title) || isEmpty(budget.description) || isEmpty(budget.meta.questions.contact_hour)){
-                alert("titleu")
+            if(isEmpty(budget.title) || isEmpty(budget.description) || isEmpty(budget.meta.questions.contact_hour) || isEmpty(budget.meta.questions.person_type)){
+                alert("Por favor, preencha os campos obrigatórios")
                 valid = false
             }
             break;
@@ -112,7 +121,7 @@ function budgetIsValid() {
                 isEmpty(budget.userApp.phone) ||
                 isEmpty(budget.meta.interest) ||
                 isEmpty(budget.estimatedPrice)){
-                alert("ultima fase");
+                alert("Por favor, preencha os campos obrigatórios");
                 valid = false;
             }
         }
@@ -150,7 +159,7 @@ function findCep() {
                 document.getElementById('budgetCity').value = "";
             } else {
                 document.getElementById('budgetCity').value = cep.localidade;
-                cep.cep = zipCode;
+                //cep.cep = zipCode;
                 setCity(cep);
             }
         }
@@ -205,8 +214,14 @@ function setName(n) {
 }
 
 function setEmail(e) {
-    budget.meta.userApp.email = e;
-    budget.userApp.email = e;
+    if (/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/.test(e.value)) {
+        budget.meta.userApp.email = e.value;
+        budget.userApp.email = e.value;
+    } else {
+        e.value = "";
+        alert('Este email é inválido!');
+    }
+
 }
 
 function setPhone(p) {
