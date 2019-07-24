@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="7ced77e2-c073-4cbf-bd46-a01e607c1629" name="Default Changelist" comment="" />
+    <list default="true" id="7ced77e2-c073-4cbf-bd46-a01e607c1629" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -14,12 +16,12 @@
     </execution>
   </component>
   <component name="FileEditorManager">
-    <leaf>
-      <file pinned="false" current-in-tab="false">
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/form.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="342">
-              <caret line="118" column="23" lean-forward="true" selection-start-line="118" selection-start-column="23" selection-end-line="118" selection-end-column="23" />
+            <state relative-caret-position="864">
+              <caret line="116" selection-start-line="116" selection-end-line="116" />
               <folding>
                 <element signature="n#style#0;n#i#0;n#label#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
                 <element signature="e#2229#2235#1#HTML" expanded="true" />
@@ -59,13 +61,12 @@
                 <element signature="n#style#0;n#hr#1;n#form#0;n#div#0;n#div#1;n#div#1;n#div#0;n#div#4;n#div#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#div#6;n#div#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#div#0;n#div#6;n#div#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#div#7;n#div#0;n#!!top" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/js/step.js">
           <provider selected="true" editor-type-id="text-editor" />
         </entry>
@@ -142,8 +143,11 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
+    <property name="node.js.path.for.package.tslint" value="project" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="settings.editor.selected.configurable" value="terminal" />
   </component>
   <component name="RunDashboard">
@@ -163,7 +167,7 @@
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="e1c55637-8924-4cc5-9ca0-716c7a166e34" name="Default Changelist" comment="" />
+      <changelist id="7ced77e2-c073-4cbf-bd46-a01e607c1629" name="Default Changelist" comment="" />
       <created>1561722675377</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
@@ -177,6 +181,7 @@
       <workItem from="1563888314196" duration="2838000" />
       <workItem from="1563891176127" duration="131000" />
       <workItem from="1563891325226" duration="15418000" />
+      <workItem from="1563971937468" duration="1440000" />
     </task>
     <task id="LOCAL-00001" summary=":pencil2: Atualiza a branch jonas">
       <created>1563888750437</created>
@@ -189,12 +194,13 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="33990000" />
+    <option name="totallyTimeSpent" value="35430000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="2576" height="1056" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.24980143" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.25178713" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -207,7 +213,7 @@
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Database Changes" order="8" />
       <window_info anchor="bottom" id="Version Control" order="9" weight="0.32792208" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="10" visible="true" weight="0.32792208" />
+      <window_info anchor="bottom" id="Terminal" order="10" weight="0.32792208" />
       <window_info anchor="bottom" id="Event Log" order="11" side_tool="true" />
       <window_info anchor="bottom" id="PHP-CGI Server" order="12" />
       <window_info anchor="bottom" id="Messages" order="13" weight="0.32792208" />
@@ -227,10 +233,13 @@
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/plain.php" />
     <entry file="file://$PROJECT_DIR$/wp-ea-bridge.php" />
+    <entry file="file://$PROJECT_DIR$/js/step.js">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
     <entry file="file://$PROJECT_DIR$/form.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="342">
-          <caret line="118" column="23" lean-forward="true" selection-start-line="118" selection-start-column="23" selection-end-line="118" selection-end-column="23" />
+        <state relative-caret-position="864">
+          <caret line="116" selection-start-line="116" selection-end-line="116" />
           <folding>
             <element signature="n#style#0;n#i#0;n#label#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
             <element signature="e#2229#2235#1#HTML" expanded="true" />
@@ -270,13 +279,9 @@
             <element signature="n#style#0;n#hr#1;n#form#0;n#div#0;n#div#1;n#div#1;n#div#0;n#div#4;n#div#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#div#6;n#div#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#div#0;n#div#6;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#7;n#div#0;n#!!top" expanded="true" />
           </folding>
         </state>
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/js/step.js">
-      <provider selected="true" editor-type-id="text-editor" />
     </entry>
   </component>
 </project>
