@@ -6,6 +6,7 @@ budget.meta = new Object();
 budget.userApp = new Object();
 budget.meta.userApp = new Object();
 budget.meta.questions = new Object();
+
 var currentTab = 0;
 
 function maskPhone(phoneInput){
@@ -53,15 +54,16 @@ function showTab(tabNumber) {
 }
 
 function eablenderBudgetNavigate(step) {
-    var stepTabs = document.getElementsByClassName("step-tab");
-    stepTabs[currentTab].style.display = "none";
-    currentTab += step;
-    if (currentTab >= stepTabs.length - 1) {
-        sendBudget();
-        return false;
+    if(budgetIsValid() || step < 0){
+        var stepTabs = document.getElementsByClassName("step-tab");
+        stepTabs[currentTab].style.display = "none";
+        currentTab += step;
+        if (currentTab >= stepTabs.length - 1) {
+            sendBudget();
+            return false;
+        }
+        showTab(currentTab);
     }
-
-    showTab(currentTab);
 }
 
 function showThanks() {
@@ -75,7 +77,50 @@ function showThanks() {
     previous.style.display = "none";
     thanks.style.display = "block";
     thanks.style.zIndex = '99999';
+}
 
+function budgetIsValid() {
+    let valid = true;
+    switch (currentTab) {
+        case 0 :
+            if (isEmpty(budget.zipCode)) {
+                alert("cep inválido");
+                valid = false;
+            }
+            break;
+        case 1:
+            if (isEmpty(budget.budgetCategory.id)) {
+                alert("categoria");
+                valid = false;
+            }
+            break;
+        case 2:
+            if (isEmpty(budget.meta) || isEmpty(budget.meta.questions.property_type) || isEmpty(budget.meta.questions.start)) {
+                alert("property type");
+                valid = false;
+            }
+            break;
+        case 3:
+            if(isEmpty(budget.title) || isEmpty(budget.description) || isEmpty(budget.meta.questions.contact_hour)){
+                alert("titleu")
+                valid = false
+            }
+            break;
+        case 4:
+            if(isEmpty(budget.meta.userApp.name) ||
+                isEmpty(budget.userApp.email) ||
+                isEmpty(budget.userApp.phone) ||
+                isEmpty(budget.meta.interest) ||
+                isEmpty(budget.estimatedPrice)){
+                alert("ultima fase");
+                valid = false;
+            }
+        }
+    return valid;
+}
+
+function isEmpty(field){
+    return typeof field === 'undefined' || typeof field === 'string' && field === '';
 }
 
 function setStepIndicator(stepIndicator) {
@@ -87,9 +132,10 @@ function setStepIndicator(stepIndicator) {
 }
 
 function findCep() {
-    var b = document.getElementById('budgetZipCode').value;
+    var zipCode = document.getElementById('budgetZipCode').value;
+    document.getElementById('budgetZipCode').value = zipCode.replace(/\D/g, "");
     var cepError = document.getElementById('cep-error');
-    if (isNaN(b)) {
+    if (isNaN(zipCode)) {
 
     }
     var x = new XMLHttpRequest();
@@ -99,14 +145,21 @@ function findCep() {
             var cep = JSON.parse(this.responseText);
             if (cep.erro == true) {
                 cepError.style.display = 'inline';
+                setCity({city: "", neighborhood: "", state: "", cep:""});
+                budget.zipCode = "";
+                document.getElementById('budgetCity').value = "";
             } else {
                 document.getElementById('budgetCity').value = cep.localidade;
+                cep.cep = zipCode;
                 setCity(cep);
             }
         }
     }
-    if (b.length == 8) {
-        var rightCep = b.substring(0, 5) + '-' + b.substring(5, 8);
+    if (zipCode.length != 8) {
+        setCity({city: "", neighborhood: "", state: "", cep: ""});
+        document.getElementById('budgetCity').value = "";
+    } else {
+        var rightCep = zipCode.substring(0, 5) + '-' + zipCode.substring(5, 8);
         budget.zipCode = rightCep;
         x.open('get', `https://viacep.com.br/ws/${rightCep}/json/`);
         x.send();
@@ -117,6 +170,7 @@ function setCity(cep){
     budget.city = cep.localidade;
     budget.neighborhood = cep.bairro;
     budget.state = cep.uf;
+    budget.zipCode = cep.cep;
 }
 
 function addCategory(id) {

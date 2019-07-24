@@ -1,6 +1,6 @@
 <?php
-$id = rand(0, 999);
-$plugin_path = plugin_dir_url(__FILE__)
+$id = rand(0,999);
+$plugin_path = plugin_dir_url( __FILE__ )
 ?>
 
 <style>
