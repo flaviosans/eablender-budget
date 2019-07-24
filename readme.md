@@ -84,6 +84,7 @@ O shortcode não pode aparecer duas ou mais vezes numa mesma página
 * Campos obrigatórios faltantes
   * O plugin deve voltar campo faltante e informar que ele é obrigatório
 * Outros erros encontrados devem ser anotados aqui, com suas (prováveis) soluções
+* **Autocompletar:** O plugin pode apresentar falhas com o autocompletar dos navegadores.
 
 ## Licença
 [Comercial](https://www.example.com/)
