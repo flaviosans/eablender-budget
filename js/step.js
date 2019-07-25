@@ -56,6 +56,11 @@ function showTab(tabNumber) {
     } else {
         document.getElementById("prevBtn").style.display = "inline";
     }
+    if (tabNumber === 3) {
+        document.getElementById("titleBudget").focus();
+    } else if (tabNumber === 4) {
+        document.getElementById("nameBudget").focus();
+    }
     if (tabNumber === (stepTab.length - 2)) {
         document.getElementById("nextBtn").innerHTML = "Finalizar";
     }
@@ -90,28 +95,60 @@ function showThanks() {
 
 function budgetIsValid() {
     let valid = true;
+    let eablenderZipCode = document.getElementById("budgetZipCode");
+    let eablenderTitle = document.getElementById("titleBudget");
+    let eablenderName = document.getElementById("nameBudget");
+    let eablenderEmail = document.getElementById("emailBudget");
+    let eablenderPhone = document.getElementById("phoneBudget");
+
+    let spanZipcode = document.getElementById("zip-error");
+    let categoryError = document.getElementById("span-error");
+    let typeError = document.getElementById("type-error");
+    let titleError = document.getElementById("eablender-span-error");
+    let descriptionError = document.getElementById("eablender-description-error");
+    let contactError = document.getElementById("eablender-contact-error");
+    let personError = document.getElementById("eablender-person-error");
+    let stepMessage = document.getElementById("step-message-error");
+    let stepThreeError = document.getElementById("step-3-error");
+
+    let nameError = document.getElementById("eablender-name-error");
+    let emailError = document.getElementById("eablender-email-error");
+    let phoneError = document.getElementById("eablender-phone-error");
+    let interestError = document.getElementById("eablender-interest-error");
+    let priceError = document.getElementById("eablender-price-error");
+    let stepFourError = document.getElementById("step-4-error");
+
     switch (currentTab) {
         case 0 :
             if (isEmpty(budget.zipCode)) {
-                alert("Cep inválido, por favor verifique");
+                // alert("Cep inválido, por favor verifique");
+                eablenderZipCode.className = "error";
+                spanZipcode.style.display = "block";
                 valid = false;
             }
             break;
         case 1:
             if (isEmpty(budget.budgetCategory.id)) {
-                alert("Por favor, selecione uma categoria");
+                // alert("Por favor, selecione uma categoria");
+                categoryError.style.display = "block";
                 valid = false;
             }
             break;
         case 2:
             if (isEmpty(budget.meta) || isEmpty(budget.meta.questions.property_type) || isEmpty(budget.meta.questions.start)) {
-                alert("Por favor, preencha os campos obrigatórios");
+                // alert("Por favor, preencha os campos obrigatórios");
+                typeError.style.display = "block";
                 valid = false;
             }
             break;
         case 3:
             if(isEmpty(budget.title) || isEmpty(budget.description) || isEmpty(budget.meta.questions.contact_hour) || isEmpty(budget.meta.questions.person_type)){
-                alert("Por favor, preencha os campos obrigatórios")
+                // alert("Por favor, preencha os campos obrigatórios");
+                titleError.className = "title-error";
+                descriptionError.className = "title-error";
+                contactError.className = "title-error";
+                personError.className = "title-error";
+                stepThreeError.style.display = "block";
                 valid = false
             }
             break;
@@ -121,10 +158,18 @@ function budgetIsValid() {
                 isEmpty(budget.userApp.phone) ||
                 isEmpty(budget.meta.interest) ||
                 isEmpty(budget.estimatedPrice)){
-                alert("Por favor, preencha os campos obrigatórios");
+                nameError.className = "title-error";
+                emailError.className = "title-error";
+                phoneError.className = "title-error";
+                interestError.className = "title-error";
+                priceError.className = "title-error";
+                stepFourError.style.display = "block";
+                // alert("Por favor, preencha os campos obrigatórios");
                 valid = false;
             }
         }
+
+
     return valid;
 }
 

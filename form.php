@@ -1,6 +1,6 @@
 <?php
-$id = rand(0,999);
-$plugin_path = plugin_dir_url( __FILE__ )
+$id = rand(0, 999);
+$plugin_path = plugin_dir_url(__FILE__)
 ?>
 
 <style>
@@ -109,11 +109,39 @@ $plugin_path = plugin_dir_url( __FILE__ )
     }
 
     .error {
-        display: none;
-        border: 2px solid red;
+        border: 2px solid red !important;
     }
+
+    #zip-error {
+        display: none;
+        color: red;
+    }
+
+    #span-error {
+        display: none;
+        color: red;
+    }
+
+    #type-error {
+        display: none;
+        color: red;
+    }
+
+    .title-error {
+        color: red;
+    }
+
     .eablender-icon {
         color: #ff7700;
+    }
+
+    #step-3-error {
+        display: none;
+        color: red;
+    }
+    #step-4-error {
+        display: none;
+        color: red;
     }
 
 </style>
@@ -121,10 +149,12 @@ $plugin_path = plugin_dir_url( __FILE__ )
 <div class="container">
     <div class="step-tab w3-animate-opacity">
         <div class="form-group">
-            <label for="budgetZipCode" class="control-label required"><i class="fas fa-map-marked-alt eablender-icon">&nbsp;</i>Insira seu
+            <label for="budgetZipCode" class="control-label required"><i class="fas fa-map-marked-alt eablender-icon">&nbsp;</i>Insira
+                seu
                 CEP, sem pontos nem traços:
-                <span id="cep-error" style="font-size: 14px"
-                      class="text-danger m-t-5">&nbsp;Cep Inválido!</span></label>
+            </label><span id="cep-error" style="font-size: 14px"
+                          class="text-danger m-t-5">&nbsp;Cep Inválido!</span>
+            <span id="zip-error">Cep é um campo obrigatório!</span>
             <input onkeyup="findCep()" type="text" class="form-control eablender-input" maxlength="8"
                    id="budgetZipCode"
                    style="width: 100%" minlength="8"/>
@@ -147,7 +177,9 @@ $plugin_path = plugin_dir_url( __FILE__ )
             <p class="cfw__title text-center">
                 Em qual
                 <b>categoria</b>
-                o orçamento se encaixa?</p>
+                o orçamento se encaixa?
+            </p>
+            <span id="span-error" style="text-align: center">Por favor, selecione uma categoria</span>
         </div>
         <div class="container">
 
@@ -205,6 +237,10 @@ $plugin_path = plugin_dir_url( __FILE__ )
     </div>
     <div class="step-tab w3-animate-opacity">
         <div class="row">
+            <div class="col-12">
+                <span id="type-error" style="text-align: center"
+                      class="col-12">Campos obrigatórios estão faltando</span>
+            </div>
             <div class="col-sm-12 col-md-6 bc__separete-vertical">
                 <p class="cfw__title" style="text-align: center;"><strong>Qual o tipo de imóvel?</strong></p>
                 <div class="form-radio m-b-30">
@@ -264,21 +300,26 @@ $plugin_path = plugin_dir_url( __FILE__ )
         <div class="row">
             <div class="col-md-12">
                 <p class="cfw__title"><strong>Adicione um
-                        título e descrição em seu pedido:</strong></p>
+                        título e descrição em seu pedido:</strong>
+                </p>
+                <span id="step-3-error" style="text-align: center;">Por favor, preencha todos os campos</span>
             </div>
             <div class="col-md-12">
                 <div class="form-group">
-                    <label for="titleBudget" class="control-label required"> <strong><i class="far fa-edit eablender-icon eablender-icon">&nbsp;</i>Título:</strong></label>
-                    <span style="font-size: 14px" class="text-danger m-t-5 error">&nbsp;Título muito curto, por favor descreva melhor!</span>
+                    <label for="titleBudget" class="control-label required">
+                        <strong><i class="far fa-edit eablender-icon eablender-icon">&nbsp;</i>Título: </strong><span
+                                id="eablender-span-error">*</span>
+
+                    </label>
                     <input id="titleBudget" onblur="setBudgetTitle(this.value)" type="text"
                            class="form-control eablender-input"
                            placeholder="Ex: Quero construir um escritório novo"
                            minlength="1">
                 </div>
                 <div class="form-group">
-                    <label for="descriptionBudget" class="control-label required"><i class="far fa-comments eablender-icon eablender-icon">&nbsp;</i>Descrição:
-                        <span style="font-size: 14px"
-                              class="text-danger m-t-5 error">&nbsp;Descrição muito curta</span>
+                    <label for="descriptionBudget" class="control-label required"><i
+                                class="far fa-comments eablender-icon eablender-icon">&nbsp;</i>Descrição: <span
+                                id="eablender-description-error">*</span>
                     </label>
                     <textarea onblur="setDescription(this.value)" id="descriptionBudget"
                               class="form-control eablender-textarea" rows="7" minlength="2"
@@ -289,7 +330,8 @@ $plugin_path = plugin_dir_url( __FILE__ )
         <div class="row col-md-12">
             <div class="col-md-6">
                 <div class="form-group">
-                    <label for="hourBudget" class="control-label required"><strong>Melhor horário para contato:</strong>
+                    <label for="hourBudget" class="control-label required"><strong>Melhor horário para
+                            contato: </strong><span id="eablender-contact-error">*</span>
                     </label>
                     <hr style="margin-top: 0.4em;">
                     <div class="form-radio">
@@ -320,7 +362,8 @@ $plugin_path = plugin_dir_url( __FILE__ )
 
             <div class="col-md-6">
                 <div class="form-group">
-                    <label for="personBudget" class="control-label required"><strong>O pedido é para:</strong></label>
+                    <label for="personBudget" class="control-label required"><strong>O pedido é para: </strong><span
+                                id="eablender-person-error">*</span></label>
                     <hr style="margin-top: 0.4em;">
                     <div class="form-radio">
                         <div class="radio radiofill radio-primary radio-inline">
@@ -347,18 +390,17 @@ $plugin_path = plugin_dir_url( __FILE__ )
         <div class="row">
             <div class="col-12 bc__separete-vertical">
                 <label><strong>Contato</strong></label>
+                <span id="step-4-error" style="text-align: center;">Por favor, preencha todos os campos</span>
                 <div class="form-group">
                     <label for="nameBudget" class="control-label required"><i class="fas fa-user-edit eablender-icon">&nbsp;</i>Nome
-                        completo: <span style="font-size: 14px"
-                                        class="text-danger m-t-5 error">&nbsp;Nome precisa ter no minimo 5 caracteres</span>
+                        completo: <span id="eablender-name-error">*</span>
                     </label>
                     <input type="text" onblur="setName(this.value)" class="form-control eablender-input"
                            id="nameBudget" minlength="5">
                 </div>
 
                 <div class="form-group">
-                    <label for="emailBudget" class="control-label required"><i class="far fa-envelope eablender-icon">&nbsp;</i>E-mail:<span style="font-size: 14px"
-                                                                                                                              class="text-danger m-t-5 error">&nbsp;Email inválido</span></label>
+                    <label for="emailBudget" class="control-label required"><i class="far fa-envelope eablender-icon">&nbsp;</i>E-mail:<span id="eablender-email-error">*</span></label>
 
                     <div class="input-group">
                         <input type="email" onblur="setEmail(this)" class="form-control eablender-input error-email"
@@ -372,8 +414,7 @@ $plugin_path = plugin_dir_url( __FILE__ )
 
                 <div class="form-group">
                     <label for="phoneBudget" class="control-label required"><i class="fas fa-phone eablender-icon"
-                                                                                >&nbsp;</i><span style="font-size: 14px"
-                                                                                                                      class="text-danger m-t-5 error">&nbsp;Campo obrigatório!</span>Telefone:</label>
+                        >&nbsp;</i>Telefone: <span id="eablender-phone-error">*</span></label>
                     <input onblur="setPhone(this.value)" onkeyup="maskPhone(this)" type="tel"
                            class="form-control phone eablender-input" id="phoneBudget"
                            name="phoneBudget">
@@ -385,7 +426,7 @@ $plugin_path = plugin_dir_url( __FILE__ )
             <div class="form-group col-12" style="padding-top: 1em;">
                 <div class="row">
                     <div class="col-12">
-                        <label><strong>Interesse:</strong></label>
+                        <label><strong>Interesse: <span id="eablender-interest-error">*</span></strong></label>
                         <select name="interest" id="interest" onclick="setInterest(this.value)" class="form-control"
                         >
                             <option value="">Selecione uma opção</option>
@@ -409,7 +450,7 @@ $plugin_path = plugin_dir_url( __FILE__ )
 
                         <form id="estimatedPrice">
                             <hr style="padding: 5px 0 5px 0">
-                            <label> <strong>Estimativa de investimento total na obra:</strong></label>
+                            <label> <strong>Estimativa de investimento total na obra: <span id="eablender-price-error">*</span></strong></label>
                             <hr style="margin-top: 0.4em;">
                             <div class="radio">
                                 <label>
