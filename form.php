@@ -152,7 +152,7 @@ $plugin_path = plugin_dir_url(__FILE__)
             <label for="budgetZipCode" class="control-label required"><i class="fas fa-map-marked-alt eablender-icon">&nbsp;</i>Insira
                 seu
                 CEP, sem pontos nem traços:
-            </label><span id="cep-error" style="font-size: 14px"
+            </label><span id="cep-error"
                           class="text-danger m-t-5">&nbsp;Cep Inválido!</span>
             <span id="zip-error">Cep é um campo obrigatório!</span>
             <input onkeyup="findCep()" type="text" class="form-control eablender-input" maxlength="8"

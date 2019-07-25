@@ -36,8 +36,8 @@ function sendBudget() {
         }
     }
 
-    // request.open('post', 'https://alpha.entendaantes.com.br:8443/budget');
-    request.open('post', 'http://localhost:8080/budget');
+    request.open('post', 'https://alpha.entendaantes.com.br:8443/budget');
+    // request.open('post', 'http://localhost:8080/budget');
     request.setRequestHeader('Content-type', 'application/json');
     request.send(JSON.stringify(budget));
 }
@@ -96,10 +96,6 @@ function showThanks() {
 function budgetIsValid() {
     let valid = true;
     let eablenderZipCode = document.getElementById("budgetZipCode");
-    let eablenderTitle = document.getElementById("titleBudget");
-    let eablenderName = document.getElementById("nameBudget");
-    let eablenderEmail = document.getElementById("emailBudget");
-    let eablenderPhone = document.getElementById("phoneBudget");
 
     let spanZipcode = document.getElementById("zip-error");
     let categoryError = document.getElementById("span-error");
@@ -108,7 +104,6 @@ function budgetIsValid() {
     let descriptionError = document.getElementById("eablender-description-error");
     let contactError = document.getElementById("eablender-contact-error");
     let personError = document.getElementById("eablender-person-error");
-    let stepMessage = document.getElementById("step-message-error");
     let stepThreeError = document.getElementById("step-3-error");
 
     let nameError = document.getElementById("eablender-name-error");
