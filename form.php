@@ -182,7 +182,6 @@ $plugin_path = plugin_dir_url(__FILE__)
             <span id="span-error" style="text-align: center">Por favor, selecione uma categoria</span>
         </div>
         <div class="container">
-
             <form>
                 <div class="row">
                     <div class="col-12">
@@ -229,7 +228,6 @@ $plugin_path = plugin_dir_url(__FILE__)
                         <div class="radio">
                             <label><input type="radio" name="optradio" onclick="addCategory(11)">Outros</label>
                         </div>
-
                     </div>
                 </div>
             </form>
@@ -284,7 +282,6 @@ $plugin_path = plugin_dir_url(__FILE__)
                         <label class="verticalRadio">
                             <input type="radio" onclick="setStart('more_than_3_months')" name="startBudget"
                                    value="more_than_3_months">
-
                             Mais de 3 meses
                         </label>
                         <label class="verticalRadio">
@@ -309,7 +306,6 @@ $plugin_path = plugin_dir_url(__FILE__)
                     <label for="titleBudget" class="control-label required">
                         <strong><i class="far fa-edit eablender-icon eablender-icon">&nbsp;</i>Título: </strong><span
                                 id="eablender-span-error">*</span>
-
                     </label>
                     <input id="titleBudget" onchange="setBudgetTitle(this.value)" type="text"
                            class="form-control eablender-input"
@@ -359,7 +355,6 @@ $plugin_path = plugin_dir_url(__FILE__)
                     </div>
                 </div>
             </div>
-
             <div class="col-md-6">
                 <div class="form-group">
                     <label for="personBudget" class="control-label required"><strong>O pedido é para: </strong><span
@@ -383,8 +378,6 @@ $plugin_path = plugin_dir_url(__FILE__)
                 </div>
             </div>
         </div>
-
-
     </div>
     <div class="step-tab w3-animate-opacity">
         <div class="row">
@@ -398,10 +391,8 @@ $plugin_path = plugin_dir_url(__FILE__)
                     <input type="text" onchange="setName(this.value)" class="form-control eablender-input"
                            id="nameBudget" minlength="5">
                 </div>
-
                 <div class="form-group">
                     <label for="emailBudget" class="control-label required"><i class="far fa-envelope eablender-icon">&nbsp;</i>E-mail:<span id="eablender-email-error">*</span></label>
-
                     <div class="input-group">
                         <input type="email" onblur="setEmail(this)" class="form-control eablender-input error-email"
                                id="emailBudget"
@@ -411,24 +402,20 @@ $plugin_path = plugin_dir_url(__FILE__)
                         </span>
                     </div>
                 </div>
-
                 <div class="form-group">
                     <label for="phoneBudget" class="control-label required"><i class="fas fa-phone eablender-icon"
                         >&nbsp;</i>Telefone: <span id="eablender-phone-error">*</span></label>
-                    <input onblur="setPhone(this.value)" onkeyup="maskPhone(this)" type="tel"
+                    <input  onkeyup="maskPhone(this)" type="tel"
                            class="form-control phone eablender-input" id="phoneBudget"
                            name="phoneBudget">
                 </div>
             </div>
-
             <hr>
-
             <div class="form-group col-12" style="padding-top: 1em;">
                 <div class="row">
                     <div class="col-12">
                         <label><strong>Interesse: <span id="eablender-interest-error">*</span></strong></label>
-                        <select name="interest" id="interest" onclick="setInterest(this.value)" class="form-control"
-                        >
+                        <select name="interest" id="interest" onclick="setInterest(this.value)" class="form-control">
                             <option value="">Selecione uma opção</option>
                             <option value="saber_apenas_precos_a_fim_de_comparacao">Saber apenas preços a fim de
                                 comparação
@@ -444,10 +431,8 @@ $plugin_path = plugin_dir_url(__FILE__)
                         </select>
                     </div>
                 </div>
-
                 <div class="row">
                     <div class="col-12">
-
                         <form id="estimatedPrice">
                             <hr style="padding: 5px 0 5px 0">
                             <label> <strong>Estimativa de investimento total na obra: <span id="eablender-price-error">*</span></strong></label>
@@ -480,19 +465,11 @@ $plugin_path = plugin_dir_url(__FILE__)
                                     Mais de R$80.000,00
                                 </label>
                             </div>
-
-
                         </form>
                     </div>
-
                 </div>
-
-
             </div>
-
         </div>
-
-
     </div>
     <div class="step-tab thanks w3-animate-opacity">
         <img class="img-fluid mx-auto d-block w3-animate-fading"

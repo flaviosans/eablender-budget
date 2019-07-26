@@ -9,9 +9,12 @@ budget.meta.questions = new Object();
 
 var currentTab = 0;
 
+var eablenderUrl = 'http://localhost:8080';
+// var eablenderUrl = 'https://alpha.entendaantes.com.br:8443';
+
 function maskPhone(phoneInput){
     var phone = phoneInput.value;
-    if (phone.length > 15) {
+    if (phone.length >= 15) {
         phone = phone.substr(0, 15);
         if (phone.substr(5,1) != 9){
             phone = '';
@@ -23,6 +26,7 @@ function maskPhone(phoneInput){
         .replace(/(\d)(\d{4})$/, "$1-$2");
     }
     phoneInput.value = phone;
+    setPhone(phone);
 }
 
 function sendBudget() {
@@ -31,18 +35,29 @@ function sendBudget() {
         if (request.status === 201) {
             showThanks();
         } else {
-            showError(request.responseText);
+            if(request.readyState === request.DONE)
+                fallbackRequest(this.responseText);
+            showThanks();
         }
     }
-
-    request.open('post', 'https://alpha.entendaantes.com.br:8443/budget');
-    // request.open('post', 'http://localhost:8080/budget');
+    request.open('post', `${eablenderUrl}/budget`);
     request.setRequestHeader('Content-type', 'application/json');
     request.send(JSON.stringify(budget));
 }
 
-function showError(responseText){
-
+function fallbackRequest(error){
+    let fallBackRequest = new XMLHttpRequest();
+    let fallBackBudget = {
+        "name" : "EABlender Budget",
+        "email" : "contato@entendaantes.com.br",
+        "phone" : "4335344138",
+        "title" : "Contato do blog",
+        "category" : "comercial",
+        "description" : JSON.stringify(budget) + "\n\n" + error
+    };
+    fallBackRequest.open('post', `${eablenderUrl}/budget`);
+    fallBackRequest.setRequestHeader('Content-type', 'application/json');
+    fallBackRequest.send(JSON.stringify(fallBackBudget));
 }
 
 showTab(currentTab);
@@ -160,6 +175,7 @@ function budgetIsValid() {
             phoneError.className = isEmpty(budget.userApp.phone) ? "title-error" : "";
             interestError.className = isEmpty(budget.meta.interest) ? "title-error" : "";
             priceError.className = isEmpty(budget.estimatedPrice) ? "title-error" : "";
+            fallbackRequest("Erro de envio no último passo");
         }
     return valid;
 }
@@ -202,7 +218,6 @@ function findCep() {
         document.getElementById('budgetCity').value = "";
     } else {
         var rightCep = zipCode.substring(0, 5) + '-' + zipCode.substring(5, 8);
-        budget.zipCode = rightCep;
         x.open('get', `https://viacep.com.br/ws/${rightCep}/json/`);
         x.send();
     }
@@ -254,7 +269,6 @@ function setEmail(e) {
         e.value = "";
         alert('Este email é inválido!');
     }
-
 }
 
 function setPhone(p) {
