@@ -155,7 +155,7 @@ $plugin_path = plugin_dir_url(__FILE__)
             </label><span id="cep-error"
                           class="text-danger m-t-5">&nbsp;Cep Inválido!</span>
             <span id="zip-error">Cep é um campo obrigatório!</span>
-            <input onkeyup="findCep()" type="text" class="form-control eablender-input" maxlength="8"
+            <input onchange="findCep()" type="text" class="form-control eablender-input" maxlength="8"
                    id="budgetZipCode"
                    style="width: 100%" minlength="8"/>
 
@@ -168,7 +168,7 @@ $plugin_path = plugin_dir_url(__FILE__)
         <div class="form-group">
             <label for="budgetNeighborhood" class="control-label"><i class="fas fa-road"
                                                                      style="color: #ff7700;">&nbsp;</i>Bairro:</label>
-            <input type="text" onblur="setNeighborhood(this.value)" id="budgetNeighborhood"
+            <input type="text" onchange="setNeighborhood(this.value)" id="budgetNeighborhood"
                    class="form-control eablender-input"/>
         </div>
     </div>
@@ -311,7 +311,7 @@ $plugin_path = plugin_dir_url(__FILE__)
                                 id="eablender-span-error">*</span>
 
                     </label>
-                    <input id="titleBudget" onblur="setBudgetTitle(this.value)" type="text"
+                    <input id="titleBudget" onchange="setBudgetTitle(this.value)" type="text"
                            class="form-control eablender-input"
                            placeholder="Ex: Quero construir um escritório novo"
                            minlength="1">
@@ -321,7 +321,7 @@ $plugin_path = plugin_dir_url(__FILE__)
                                 class="far fa-comments eablender-icon eablender-icon">&nbsp;</i>Descrição: <span
                                 id="eablender-description-error">*</span>
                     </label>
-                    <textarea onblur="setDescription(this.value)" id="descriptionBudget"
+                    <textarea onchange="setDescription(this.value)" id="descriptionBudget"
                               class="form-control eablender-textarea" rows="7" minlength="2"
                               placeholder="Adicione os detalhes que você sente necessidade de explicar para o profissional. Quanto mais informações constar, mais rápido será o contato do profissional para te passar a melhor proposta de orçamento."></textarea>
                 </div>
@@ -395,7 +395,7 @@ $plugin_path = plugin_dir_url(__FILE__)
                     <label for="nameBudget" class="control-label required"><i class="fas fa-user-edit eablender-icon">&nbsp;</i>Nome
                         completo: <span id="eablender-name-error">*</span>
                     </label>
-                    <input type="text" onblur="setName(this.value)" class="form-control eablender-input"
+                    <input type="text" onchange="setName(this.value)" class="form-control eablender-input"
                            id="nameBudget" minlength="5">
                 </div>
 

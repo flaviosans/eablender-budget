@@ -17,7 +17,6 @@ function maskPhone(phoneInput){
             phone = '';
             alert('O telefone não é celular!');
         }
-        //alert('O telefone é inválido!');
     } else {
     phone = phone.replace(/\D/g, "")
         .replace(/^(\d{2})(\d)/g, "($1) $2")
@@ -116,36 +115,36 @@ function budgetIsValid() {
     switch (currentTab) {
         case 0 :
             if (isEmpty(budget.zipCode)) {
-                // alert("Cep inválido, por favor verifique");
                 eablenderZipCode.className = "error";
                 spanZipcode.style.display = "block";
                 valid = false;
+            } else {
+                eablenderZipCode.classList.remove("error");
+                spanZipcode.style.display = "none";
             }
             break;
         case 1:
             if (isEmpty(budget.budgetCategory.id)) {
-                // alert("Por favor, selecione uma categoria");
                 categoryError.style.display = "block";
                 valid = false;
-            }
+            } else categoryError.style.display = "none";
             break;
         case 2:
             if (isEmpty(budget.meta) || isEmpty(budget.meta.questions.property_type) || isEmpty(budget.meta.questions.start)) {
-                // alert("Por favor, preencha os campos obrigatórios");
                 typeError.style.display = "block";
                 valid = false;
-            }
+            } else typeError.style.display = "none";
             break;
         case 3:
             if(isEmpty(budget.title) || isEmpty(budget.description) || isEmpty(budget.meta.questions.contact_hour) || isEmpty(budget.meta.questions.person_type)){
-                // alert("Por favor, preencha os campos obrigatórios");
-                titleError.className = "title-error";
-                descriptionError.className = "title-error";
-                contactError.className = "title-error";
-                personError.className = "title-error";
+                valid = false;
                 stepThreeError.style.display = "block";
-                valid = false
             }
+            titleError.className = isEmpty(budget.title) ? "title-error" : "";
+            descriptionError.className = isEmpty(budget.description) ?  "title-error" : "";
+            contactError.className = isEmpty(budget.meta.questions.contact_hour) ? "title-error" : "";
+            personError.className = isEmpty(budget.meta.questions.person_type) ? "title-error" : "";
+            stepThreeError.style.display = "none";
             break;
         case 4:
             if(isEmpty(budget.meta.userApp.name) ||
@@ -153,18 +152,15 @@ function budgetIsValid() {
                 isEmpty(budget.userApp.phone) ||
                 isEmpty(budget.meta.interest) ||
                 isEmpty(budget.estimatedPrice)){
-                nameError.className = "title-error";
-                emailError.className = "title-error";
-                phoneError.className = "title-error";
-                interestError.className = "title-error";
-                priceError.className = "title-error";
                 stepFourError.style.display = "block";
-                // alert("Por favor, preencha os campos obrigatórios");
                 valid = false;
             }
+            nameError.className = isEmpty(budget.meta.userApp.name) ? "title-error" : "";
+            emailError.className = isEmpty(budget.userApp.email) ? "title-error" : "";
+            phoneError.className = isEmpty(budget.userApp.phone) ? "title-error" : "";
+            interestError.className = isEmpty(budget.meta.interest) ? "title-error" : "";
+            priceError.className = isEmpty(budget.estimatedPrice) ? "title-error" : "";
         }
-
-
     return valid;
 }
 
@@ -184,9 +180,6 @@ function findCep() {
     var zipCode = document.getElementById('budgetZipCode').value;
     document.getElementById('budgetZipCode').value = zipCode.replace(/\D/g, "");
     var cepError = document.getElementById('cep-error');
-    if (isNaN(zipCode)) {
-
-    }
     var x = new XMLHttpRequest();
     x.onreadystatechange = function () {
         if (x.readyState == 4 && x.status == 200) {
