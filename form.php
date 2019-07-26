@@ -156,9 +156,9 @@ $plugin_path = plugin_dir_url(__FILE__)
             </label><span id="cep-error"
                           class="text-danger m-t-5">&nbsp;Cep Inválido!</span>
             <span id="zip-error">Cep é um campo obrigatório!</span>
-            <input onchange="findCep()" type="text" class="form-control eablender-input" maxlength="8"
+            <input onkeyup="findCep()" type="text" class="form-control eablender-input" maxlength="9"
                    id="budgetZipCode"
-                   style="width: 100%" minlength="8" autocomplete="entendaantes"/>
+                   style="width: 100%" minlength="9" autocomplete="entendaantes"/>
 
             <div class="form-group">
                 <label for="budgetCity" class="control-label"><i class="fas fa-city eablender-icon">&nbsp;</i>Cidade

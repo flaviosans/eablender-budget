@@ -202,7 +202,9 @@ function setStepIndicator(stepIndicator) {
 }
 
 function findCep() {
+    budgetIsValid();
     var zipCode = maskCep(document.getElementById('budgetZipCode'));
+    budget.zipCode = zipCode;
     var cepError = document.getElementById('cep-error');
     var x = new XMLHttpRequest();
     x.onreadystatechange = function () {
@@ -221,7 +223,7 @@ function findCep() {
             }
         }
     }
-    if (zipCode.length !=8) {
+    if (zipCode.length !=9) {
         setCity({city: "", neighborhood: "", state: "", cep: ""});
         document.getElementById('budgetCity').value = "";
     } else {
