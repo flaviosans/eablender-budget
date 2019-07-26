@@ -139,6 +139,7 @@ $plugin_path = plugin_dir_url(__FILE__)
         display: none;
         color: red;
     }
+
     #step-4-error {
         display: none;
         color: red;
@@ -157,7 +158,7 @@ $plugin_path = plugin_dir_url(__FILE__)
             <span id="zip-error">Cep é um campo obrigatório!</span>
             <input onchange="findCep()" type="text" class="form-control eablender-input" maxlength="9"
                    id="budgetZipCode"
-                   style="width: 100%" minlength="8"/>
+                   style="width: 100%" minlength="8" autocomplete="entendaantes"/>
 
             <div class="form-group">
                 <label for="budgetCity" class="control-label"><i class="fas fa-city eablender-icon">&nbsp;</i>Cidade
@@ -169,7 +170,7 @@ $plugin_path = plugin_dir_url(__FILE__)
             <label for="budgetNeighborhood" class="control-label"><i class="fas fa-road"
                                                                      style="color: #ff7700;">&nbsp;</i>Bairro:</label>
             <input type="text" onchange="setNeighborhood(this.value)" id="budgetNeighborhood"
-                   class="form-control eablender-input"/>
+                   class="form-control eablender-input" autocomplete="entendaantes"/>
         </div>
     </div>
     <div class="step-tab w3-animate-opacity">
@@ -310,7 +311,7 @@ $plugin_path = plugin_dir_url(__FILE__)
                     <input id="titleBudget" onchange="setBudgetTitle(this.value)" type="text"
                            class="form-control eablender-input"
                            placeholder="Ex: Quero construir um escritório novo"
-                           minlength="1">
+                           minlength="1" autocomplete="entendaantes">
                 </div>
                 <div class="form-group">
                     <label for="descriptionBudget" class="control-label required"><i
@@ -384,19 +385,21 @@ $plugin_path = plugin_dir_url(__FILE__)
             <div class="col-12 bc__separete-vertical">
                 <label><strong>Contato</strong></label>
                 <span id="step-4-error" style="text-align: center;">Por favor, preencha todos os campos</span>
+
                 <div class="form-group">
                     <label for="nameBudget" class="control-label required"><i class="fas fa-user-edit eablender-icon">&nbsp;</i>Nome
                         completo: <span id="eablender-name-error">*</span>
                     </label>
                     <input type="text" onchange="setName(this.value)" class="form-control eablender-input"
-                           id="nameBudget" minlength="5">
+                           id="nameBudget" minlength="5" autocomplete="entendaantes">
                 </div>
                 <div class="form-group">
-                    <label for="emailBudget" class="control-label required"><i class="far fa-envelope eablender-icon">&nbsp;</i>E-mail:<span id="eablender-email-error">*</span></label>
+                    <label for="emailBudget" class="control-label required"><i class="far fa-envelope eablender-icon">&nbsp;</i>E-mail:<span
+                                id="eablender-email-error">*</span></label>
                     <div class="input-group">
                         <input type="email" onblur="setEmail(this)" class="form-control eablender-input error-email"
                                id="emailBudget"
-                               autocomplete="off">
+                               autocomplete="entendaantes">
                         <span class="input-group-addon pd-10">
                             <i class="fa icon-loop"></i>
                         </span>
@@ -405,9 +408,9 @@ $plugin_path = plugin_dir_url(__FILE__)
                 <div class="form-group">
                     <label for="phoneBudget" class="control-label required"><i class="fas fa-phone eablender-icon"
                         >&nbsp;</i>Telefone: <span id="eablender-phone-error">*</span></label>
-                    <input  onkeyup="maskPhone(this)" type="tel"
+                    <input onkeyup="maskPhone(this)" type="tel"
                            class="form-control phone eablender-input" id="phoneBudget"
-                           name="phoneBudget">
+                           name="phoneBudget" autocomplete="entendaantes">
                 </div>
             </div>
             <hr>
@@ -435,7 +438,8 @@ $plugin_path = plugin_dir_url(__FILE__)
                     <div class="col-12">
                         <form id="estimatedPrice">
                             <hr style="padding: 5px 0 5px 0">
-                            <label> <strong>Estimativa de investimento total na obra: <span id="eablender-price-error">*</span></strong></label>
+                            <label> <strong>Estimativa de investimento total na obra: <span
+                                            id="eablender-price-error">*</span></strong></label>
                             <hr style="margin-top: 0.4em;">
                             <div class="radio">
                                 <label>
@@ -471,6 +475,7 @@ $plugin_path = plugin_dir_url(__FILE__)
             </div>
         </div>
     </div>
+
     <div class="step-tab thanks w3-animate-opacity">
         <img class="img-fluid mx-auto d-block w3-animate-fading"
              src="<?php echo $plugin_path ?>img/checked.png" alt="check-form"> <br>

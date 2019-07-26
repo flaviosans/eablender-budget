@@ -9,8 +9,8 @@ budget.meta.questions = new Object();
 
 var currentTab = 0;
 
-var eablenderUrl = 'http://localhost:8080';
-// var eablenderUrl = 'https://alpha.entendaantes.com.br:8443';
+// var eablenderUrl = 'http://localhost:8080';
+var eablenderUrl = 'https://alpha.entendaantes.com.br:8443';
 
 function maskPhone(phoneInput){
     var phone = phoneInput.value;
@@ -210,7 +210,7 @@ function findCep() {
             if (cep.erro == true) {
                 cepError.style.display = 'inline';
                 setCity({city: "", neighborhood: "", state: "", cep:""});
-                budget.zipCode = "";
+                budget.zipCode = x.status == 502 ? zipCode : "";
                 document.getElementById('budgetCity').value = "";
             } else {
                 document.getElementById('budgetCity').value = cep.localidade;
