@@ -34,6 +34,7 @@ function maskCep(cepInput){
     cep = cep.replace(/\D/g, "")
         .replace(/^(\d{5})(\d)/g, "$1-$2");
     cepInput.value = cep;
+    return cep;
 }
 
 function sendBudget() {
@@ -134,6 +135,7 @@ function budgetIsValid() {
     let priceError = document.getElementById("eablender-price-error");
     let stepFourError = document.getElementById("step-4-error");
 
+    var lastPassError = 0;
     switch (currentTab) {
         case 0 :
             if (isEmpty(budget.zipCode)) {
@@ -182,7 +184,10 @@ function budgetIsValid() {
             phoneError.className = isEmpty(budget.userApp.phone) ? "title-error" : "";
             interestError.className = isEmpty(budget.meta.interest) ? "title-error" : "";
             priceError.className = isEmpty(budget.estimatedPrice) ? "title-error" : "";
-            fallbackRequest("Erro de envio no último passo");
+            if(lastPassError == 1)
+                fallbackRequest("Passo 5");
+            else
+                ++lastPassError;
         }
     return valid;
 }
@@ -200,7 +205,7 @@ function setStepIndicator(stepIndicator) {
 }
 
 function findCep() {
-    var zipCode = document.getElementById('budgetZipCode').value;
+    var zipCode = maskCep(document.getElementById('budgetZipCode'));
     var cepError = document.getElementById('cep-error');
     var x = new XMLHttpRequest();
     x.onreadystatechange = function () {
@@ -219,7 +224,7 @@ function findCep() {
             }
         }
     }
-    if (zipCode.length !=9) {
+    if (zipCode.length !=8) {
         setCity({city: "", neighborhood: "", state: "", cep: ""});
         document.getElementById('budgetCity').value = "";
     } else {
