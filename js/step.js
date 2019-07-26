@@ -38,13 +38,10 @@ function maskCep(cepInput){
 }
 
 function sendBudget() {
-    var request = new XMLHttpRequest();
+    fallbackRequest("Backup do orçamento");
+    let request = new XMLHttpRequest();
     request.onreadystatechange = function () {
         if (request.status === 201) {
-            showThanks();
-        } else {
-            if(request.readyState === request.DONE)
-                fallbackRequest(this.responseText);
             showThanks();
         }
     }
