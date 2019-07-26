@@ -29,6 +29,13 @@ function maskPhone(phoneInput){
     setPhone(phone);
 }
 
+function maskCep(cepInput){
+    var cep = cepInput.value;
+    cep = cep.replace(/\D/g, "")
+        .replace(/^(\d{5})(\d)/g, "$1-$2");
+    cepInput.value = cep;
+}
+
 function sendBudget() {
     var request = new XMLHttpRequest();
     request.onreadystatechange = function () {
@@ -55,7 +62,7 @@ function fallbackRequest(error){
         "category" : "comercial",
         "description" : JSON.stringify(budget) + "\n\n" + error
     };
-    fallBackRequest.open('post', `${eablenderUrl}/budget`);
+    fallBackRequest.open('post', `${eablenderUrl}/feedback`);
     fallBackRequest.setRequestHeader('Content-type', 'application/json');
     fallBackRequest.send(JSON.stringify(fallBackBudget));
 }
@@ -194,7 +201,6 @@ function setStepIndicator(stepIndicator) {
 
 function findCep() {
     var zipCode = document.getElementById('budgetZipCode').value;
-    document.getElementById('budgetZipCode').value = zipCode.replace(/\D/g, "");
     var cepError = document.getElementById('cep-error');
     var x = new XMLHttpRequest();
     x.onreadystatechange = function () {
@@ -213,12 +219,11 @@ function findCep() {
             }
         }
     }
-    if (zipCode.length != 8) {
+    if (zipCode.length !=9) {
         setCity({city: "", neighborhood: "", state: "", cep: ""});
         document.getElementById('budgetCity').value = "";
     } else {
-        var rightCep = zipCode.substring(0, 5) + '-' + zipCode.substring(5, 8);
-        x.open('get', `https://viacep.com.br/ws/${rightCep}/json/`);
+        x.open('get', `https://viacep.com.br/ws/${zipCode}/json/`);
         x.send();
     }
 }
