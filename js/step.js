@@ -1,4 +1,3 @@
-
 let budget = new Object();
 budget.budgetCategory = new Object();
 budget.budgetSubCategory = new Object();
@@ -8,6 +7,8 @@ budget.meta.userApp = new Object();
 budget.meta.questions = new Object();
 
 let currentTab = 0;
+
+const sessionId = Math.random();
 
 // let eablenderUrl = 'http://localhost:8080';
 let eablenderUrl = 'https://alpha.entendaantes.com.br:8443';
@@ -57,9 +58,11 @@ function sendBudget() {
     request.onreadystatechange = function () {
         if (request.status === 201) {
             showThanks();
+            ga('send', 'event', 'eablender-budget', 'go-to-step', sessionId+'-sent');
         } else {
             if(request.readyState === request.DONE){
                 fallbackRequest("Falha de API");
+                ga('send', 'event', 'eablender-budget', 'go-to-step', sessionId+'-fail');
                 showThanks();
             }
         }
@@ -114,6 +117,7 @@ function eablenderBudgetNavigate(step) {
             sendBudget();
             return false;
         }
+        ga('send', 'event', 'eablender-budget', 'go-to-step', sessionId+'-'+currentTab);
         showTab(currentTab);
     }
 }
@@ -203,6 +207,8 @@ function budgetIsValid() {
             else
                 ++lastPassError;
         }
+        if(!valid)
+            ga('send', 'event', 'eablender-budget', 'go-to-step', sessionId+'-step-'+currentTab+'-invalid');
     return valid;
 }
 
