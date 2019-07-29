@@ -58,11 +58,11 @@ function sendBudget() {
     request.onreadystatechange = function () {
         if (request.status === 201) {
             showThanks();
-            ga('send', 'event', 'eablender-budget', 'go-to-step', sessionId+'-sent');
+            ga('send', 'event', 'eablender-budget', 'go-to-step','success');
         } else {
             if(request.readyState === request.DONE){
                 fallbackRequest("Falha de API");
-                ga('send', 'event', 'eablender-budget', 'go-to-step', sessionId+'-fail');
+                ga('send', 'event', 'eablender-budget', 'go-to-step', 'fail');
                 showThanks();
             }
         }
@@ -117,7 +117,7 @@ function eablenderBudgetNavigate(step) {
             sendBudget();
             return false;
         }
-        ga('send', 'event', 'eablender-budget', 'go-to-step', sessionId+'-'+currentTab);
+        ga('send', 'event', 'eablender-budget', 'go-to-step', currentTab);
         showTab(currentTab);
     }
 }
@@ -208,7 +208,7 @@ function budgetIsValid() {
                 ++lastPassError;
         }
         if(!valid)
-            ga('send', 'event', 'eablender-budget', 'go-to-step', sessionId+'-step-'+currentTab+'-invalid');
+            ga('send', 'event', 'eablender-budget', 'go-to-step', 'step-'+currentTab+'-invalid');
     return valid;
 }
 
