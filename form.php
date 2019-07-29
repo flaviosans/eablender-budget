@@ -154,9 +154,9 @@ $plugin_path = plugin_dir_url(__FILE__)
                 seu
                 CEP, sem pontos nem traços:
             </label><span id="cep-error"
-                          class="text-danger m-t-5">&nbsp;Cep Inválido!</span>
-            <span id="zip-error">Cep é um campo obrigatório!</span>
-            <input onkeyup="findCep()" type="text" class="form-control eablender-input" maxlength="9"
+                          class="text-info m-t-5">&nbsp;Não encontramos o seu CEP em nossa base de dados</span>
+            <span id="zip-error">Por favor, verifique o CEP digitado</span>
+            <input onkeyup="maskCep(this)" type="text" class="form-control eablender-input" maxlength="9"
                    id="budgetZipCode"
                    style="width: 100%" minlength="9" autocomplete="entendaantes"/>
 
