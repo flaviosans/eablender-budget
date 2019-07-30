@@ -36,7 +36,7 @@ $plugin_path = plugin_dir_url(__FILE__)
         background-color: #fd7d1a;
         color: #ffffff;
         border: none;
-        padding: 10px 20px;
+        padding: 5px;
         font-size: 17px;
         cursor: pointer;
     }
