@@ -157,7 +157,7 @@ $plugin_path = plugin_dir_url(__FILE__)
                           class="text-info m-t-5">&nbsp;Não encontramos o seu CEP em nossa base de dados</span>
             <span id="zip-error">Por favor, verifique o CEP digitado</span>
             <input onkeyup="maskCep(this)" type="text" class="form-control eablender-input" maxlength="9"
-                   id="budgetZipCode"
+                   id="budgetZipCode" type="number"
                    style="width: 100%" minlength="9" autocomplete="entendaantes"/>
 
             <div class="form-group">
