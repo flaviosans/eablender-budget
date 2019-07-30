@@ -26,6 +26,7 @@ function maskPhone(phoneInput){
         if (phone.substr(5,1) != 9){
             phone = '';
             alert('O telefone não é celular!');
+            ga('send', 'event', 'eablender-budget', 'step-'+currentTab+'non-mobile-error' );
         }
     } else {
     phone = phone.replace(/\D/g, "")
@@ -233,19 +234,21 @@ function findCep(zipCode) {
     x.onreadystatechange = function () {
         if (x.readyState === 4 && x.status === 200) {
             cepError.style.display = 'none';
-            var cep = JSON.parse(this.responseText);
+            let cep = JSON.parse(this.responseText);
             if (cep.erro === true) {
                 cepError.style.display = 'inline';
                 setCity({city: "", neighborhood: "", state: "", cep: zipCode});
+                ga('send', 'event', 'eablender-budget', 'step-'+currentTab+'-custom-cep' );
                 document.getElementById('budgetCity').value = "";
             } else {
                 document.getElementById('budgetCity').value = cep.localidade;
-                //cep.cep = zipCode;
                 setCity(cep);
             }
+        } else if (x.readyState === 4 && x.status !== 200) {
+            ga('send', 'event', 'eablender-budget', 'step-'+currentTab+'-cep-error-'+x.status );
         }
     };
-    if (zipCode.length !=9) {
+    if (zipCode.length !== 9) {
         setCity({city: "", neighborhood: "", state: "", cep: ""});
         document.getElementById('budgetCity').value = "";
     } else {
@@ -299,6 +302,7 @@ function setEmail(e) {
     } else {
         e.value = "";
         alert('Este email é inválido!');
+        ga('send', 'event', 'eablender-budget', 'step-'+currentTab+'invalid-email' );
     }
 }
 
