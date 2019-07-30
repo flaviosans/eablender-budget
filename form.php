@@ -145,7 +145,30 @@ $plugin_path = plugin_dir_url(__FILE__)
         color: red;
     }
 
+    @media only screen and (max-width: 760px) {
+    #stars {
+        padding-top: 15px;
+    }
+    }
+
 </style>
+
+<div class="container">
+    <div class="col-md-12">
+        <div class="row" style="margin-bottom: 35px">
+            <div class="col-md-6">
+                <div class="row"><img style="display: block; margin-left: auto; margin-right: auto;" src="https://entendaantes.com.br/wp-content/uploads/2019/07/shield.png" /></div>
+                <div class="row"><span style="text-align: center; margin-left: auto; margin-right: auto; padding-top: 10px">Orçamento grátis e seguro</span></div>
+            </div>
+            <div class="col-md-6" id="stars">
+                <div class="row" style="margin-left: auto; margin-right: auto; max-width: 120px; padding-bottom: 10px;"><img src="https://entendaantes.com.br/wp-content/uploads/2019/07/star.png" /><img src="https://entendaantes.com.br/wp-content/uploads/2019/07/star.png" /><img src="https://entendaantes.com.br/wp-content/uploads/2019/07/star.png" /><img src="https://entendaantes.com.br/wp-content/uploads/2019/07/star.png" /><img src="https://entendaantes.com.br/wp-content/uploads/2019/07/star.png" /></div>
+                <div class="row"><span style="text-align: center; margin-left: auto; margin-right: auto;">Profissionais avaliados</span></div>
+            </div>
+        </div>
+    </div>
+</div>
+<h4 style="text-align: center; padding-bottom: 25px;"><span style="color: #0579ff;">Iremos te ajudar a realizar o seu sonho fechando o melhor negócio!</span></h4>
+<h5 style="text-align: center; padding-bottom: 25px;"><span style="color: #606062;">Preencha algumas informações para realizarmos a indicação dos profissionais e empresas certas</span></h5>
 
 <div class="container">
     <div class="step-tab w3-animate-opacity">
