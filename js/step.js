@@ -227,6 +227,7 @@ function setStepIndicator(stepIndicator) {
 
 function findCep(zipCode) {
     budget.zipCode = zipCode;
+    let budgetCity = document.getElementById('budgetCity');
     setCity({
         localidade: "", bairro:"", uf: "", cep: zipCode
     });
@@ -237,11 +238,13 @@ function findCep(zipCode) {
             let cep = JSON.parse(this.responseText);
             if (cep.erro === true) {
                 cepError.style.display = 'inline';
-                setCity({city: "", neighborhood: "", state: "", cep: zipCode});
                 ga('send', 'event', 'eablender-budget', 'step-'+currentTab+'-custom-cep' );
-                document.getElementById('budgetCity').value = "";
+                budgetCity.value = "";
+                budgetCity.readOnly = false;
+                setCity({city: "", neighborhood: "", state: "", cep: zipCode});
             } else {
-                document.getElementById('budgetCity').value = cep.localidade;
+                budgetCity.readOnly = true;
+                budgetCity.value = cep.localidade;
                 setCity(cep);
             }
         } else if (x.readyState === 4 && x.status !== 200) {
