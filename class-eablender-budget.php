@@ -5,11 +5,6 @@ class EABlender_Budget{
 	protected $api;
 
 	public function __construct() {
-	    if(class_exists('EABlender_API')){
-		    $this->api = EABlender_API::get_instance();
-        } else {
-		    add_action( 'admin_notices', array($this, 'eablender_budget_api_error'));
-        }
 		add_action('wp_enqueue_scripts', array($this, 'eablender_budget_scripts') );
 		add_shortcode( 'eablender-budget', [$this, 'eablender_budget']);
 	}
@@ -32,13 +27,11 @@ class EABlender_Budget{
 		wp_enqueue_script( 'ea-bridge-step', plugin_dir_url( __FILE__ ) . 'js/step.js', array('jquery'), null, true );
 	}
 
-	function get_string_from_path($path){
+	function eablender_budget($atts = []){
+		$value = shortcode_atts( ['header' => 'false'], $atts );
+		$show = $value['header'];
 		ob_start();
-		include(plugin_dir_path( __FILE__ ) . $path);
+		include(plugin_dir_path( __FILE__ ) . 'form.php');
 		return ob_get_clean();
-	}
-
-	function eablender_budget(){
-		return $this->get_string_from_path( 'form.php');
 	}
 }

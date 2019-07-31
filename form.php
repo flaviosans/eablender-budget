@@ -1,6 +1,6 @@
 <?php
 $id = rand(0, 999);
-$plugin_path = plugin_dir_url(__FILE__)
+$plugin_path = plugin_dir_url(__FILE__);
 ?>
 
 <style>
@@ -152,7 +152,7 @@ $plugin_path = plugin_dir_url(__FILE__)
     }
 
 </style>
-
+<?php if($show === "true") { ?>
 <div class="container">
     <div class="col-md-12">
         <div class="row" style="margin-bottom: 35px">
@@ -169,6 +169,8 @@ $plugin_path = plugin_dir_url(__FILE__)
 </div>
 <h4 style="text-align: center; padding-bottom: 25px;"><span style="color: #0579ff;">Iremos te ajudar a realizar o seu sonho fechando o melhor negócio!</span></h4>
 <h5 style="text-align: center; padding-bottom: 25px;"><span style="color: #606062;">Preencha algumas informações para realizarmos a indicação dos profissionais e empresas certas</span></h5>
+    
+<?php } ?>
 
 <div class="container">
     <div class="step-tab w3-animate-opacity">
