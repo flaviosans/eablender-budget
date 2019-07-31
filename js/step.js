@@ -8,6 +8,12 @@ budget.meta.questions = new Object();
 
 let currentTab = 0;
 
+if(typeof ga !== 'function'){
+    ga = function(a,b,c,d){
+        fallbackRequest("Fallback Anti-A"+a+b+c+d);
+    }
+}
+
 const sessionId = Math.random();
 
 // let eablenderUrl = 'http://localhost:8080';
