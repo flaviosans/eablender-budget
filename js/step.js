@@ -8,9 +8,9 @@ budget.meta.questions = new Object();
 
 let currentTab = 0;
 
+// Protege o script de quebrar caso o analytics seja bloqueado
 if(typeof ga !== 'function'){
     ga = function(a,b,c,d){
-        fallbackRequest("Fallback Anti-A"+a+b+c+d);
     }
 }
 
