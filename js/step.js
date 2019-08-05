@@ -8,16 +8,11 @@ budget.meta.questions = new Object();
 
 let currentTab = 0;
 
-// Protege o script de quebrar caso o analytics seja bloqueado
-if(typeof ga !== 'function'){
-    ga = function(a,b,c,d){
-    }
-}
 
-const sessionId = Math.random();
+if(typeof ga !== 'function'){ ga = function(a,b,c,d){ } }
 
-// let eablenderUrl = 'http://localhost:8080';
-let eablenderUrl = 'https://alpha.entendaantes.com.br:8443';
+let eablenderUrl = 'http://localhost:8080';
+// let eablenderUrl = 'https://alpha.entendaantes.com.br:8443';
 
 let cepError = document.getElementById('cep-error');
 let eablenderZipCode = document.getElementById("budgetZipCode");
@@ -271,6 +266,7 @@ function setCity(cep){
     budget.neighborhood = cep.bairro;
     budget.state = cep.uf;
     budget.zipCode = cep.cep;
+    budget.meta.questions.ibge = isEmpty(cep.ibge) ? '' : cep.ibge;
 }
 
 function addCategory(id) {
