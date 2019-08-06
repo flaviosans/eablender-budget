@@ -5,6 +5,7 @@ budget.meta = new Object();
 budget.userApp = new Object();
 budget.meta.userApp = new Object();
 budget.meta.questions = new Object();
+budget.meta.city = new Object();
 
 let currentTab = 0;
 
@@ -266,7 +267,8 @@ function setCity(cep){
     budget.neighborhood = cep.bairro;
     budget.state = cep.uf;
     budget.zipCode = cep.cep;
-    budget.meta.questions.ibge = isEmpty(cep.ibge) ? '' : cep.ibge;
+    budget.meta.city.ibge = isEmpty(cep.ibge) ? '' : cep.ibge;
+    budget.meta.city.name = cep.localidade;
 }
 
 function addCategory(id) {
