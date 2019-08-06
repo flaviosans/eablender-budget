@@ -9,7 +9,7 @@ budget.meta.questions = new Object();
 let currentTab = 0;
 
 
-if(typeof ga !== 'function'){ ga = function(a,b,c,d){ } }
+if(typeof ga !== 'function'){ ga = function(a,b,c,d){ console.log(d) } }
 
 let eablenderUrl = 'http://localhost:8080';
 // let eablenderUrl = 'https://alpha.entendaantes.com.br:8443';

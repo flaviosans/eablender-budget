@@ -69,7 +69,7 @@ Faça o download do repositório como ZIP e instale no Wordpress
 
 ## Como usar?
 
-Insira o shortcode `[eablender-budget]` no lugar onde deve ser exibido o EABlender - Budget
+Insira o shortcode `[eablender-budget]` no lugar onde deve ser exibido o EABlender - Budget. Insira como parâmetro do shortcode `header="true"`, e ele exibirá o cabeçalho padrão.
 
 ## Como não usar?
 
