@@ -433,7 +433,7 @@ $plugin_path = plugin_dir_url(__FILE__);
                 <div class="form-group">
                     <label for="phoneBudget" class="control-label required"><i class="fas fa-phone eablender-icon"
                         >&nbsp;</i>Telefone: <span id="eablender-phone-error">*</span></label>
-                    <input onkeyup="maskPhone(this)" type="tel"
+                    <input onkeyup="maskPhone(this)" type="tel" minlength="15" maxlength="15"
                            class="form-control phone eablender-input" id="phoneBudget"
                            name="phoneBudget" autocomplete="entendaantes">
                 </div>

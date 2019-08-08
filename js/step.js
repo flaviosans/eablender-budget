@@ -9,7 +9,7 @@ budget.meta.city = new Object();
 
 let currentTab = 0;
 
-if(typeof ga !== 'function'){ ga = function(a,b,c,d){ console.log(d) } }
+if(typeof ga !== 'function'){ ga = function(a,b,c,d, e){ console.log(d + ': '+ e) } }
 
 let eablenderUrl = 'http://localhost:8080';
 // let eablenderUrl = 'https://alpha.entendaantes.com.br:8443';
@@ -17,23 +17,31 @@ let eablenderUrl = 'http://localhost:8080';
 let cepError = document.getElementById('cep-error');
 let eablenderZipCode = document.getElementById("budgetZipCode");
 let spanZipcode = document.getElementById("zip-error");
+let phone = document.getElementById('phoneBudget');
 
+function validatePhone(phone){
+    let valid = true;
+    if (phone.length >= 15) {
+        phone = phone.substr(0, 15);
+        if (phone.substr(5,1) != 9){
+            alert('O telefone não é celular!');
+            ga('send', 'event', 'eablender-budget', 'step-'+currentTab+'non-mobile-error' );
+            valid = false;
+        }
+    }
+    return valid
+}
 function maskPhone(phoneInput){
     eablenderZipCode.classList.remove("error");
     spanZipcode.style.display = "none";
     var phone = phoneInput.value;
-    if (phone.length >= 15) {
-        phone = phone.substr(0, 15);
-        if (phone.substr(5,1) != 9){
-            phone = '';
-            alert('O telefone não é celular!');
-            ga('send', 'event', 'eablender-budget', 'step-'+currentTab+'non-mobile-error' );
-        }
-    } else {
+
     phone = phone.replace(/\D/g, "")
         .replace(/^(\d{2})(\d)/g, "($1) $2")
         .replace(/(\d)(\d{4})$/, "$1-$2");
-    }
+
+    if (phone.length === 15)
+        phone = phone.substr(0, 15);
     phoneInput.value = phone;
     setPhone(phone);
 }
@@ -60,7 +68,7 @@ function sendBudget() {
     request.onreadystatechange = function () {
         if (request.status === 201) {
             showThanks();
-            ga('send', 'event', 'eablender-budget', 'step-success');
+            ga('send', 'event', 'eablender-budget', 'step', currentTab);
         } else {
             if(request.readyState === request.DONE){
                 fallbackRequest("Falha de API");
@@ -113,13 +121,14 @@ function showTab(tabNumber) {
 function eablenderBudgetNavigate(step) {
     if(budgetIsValid() || step < 0){
         var stepTabs = document.getElementsByClassName("step-tab");
-        stepTabs[currentTab].style.display = "none";
+        stepTabs[currentTab % stepTabs.length].style.display = "none";
         currentTab += step;
+        validatePhone(phone.value)
         if (currentTab >= stepTabs.length - 1) {
             sendBudget();
             return false;
         }
-        ga('send', 'event', 'eablender-budget', 'step-'+currentTab );
+        ga('send', 'event', 'eablender-budget', 'step', currentTab );
         showTab(currentTab);
     }
 }
@@ -154,6 +163,7 @@ function budgetIsValid() {
     let interestError = document.getElementById("eablender-interest-error");
     let priceError = document.getElementById("eablender-price-error");
     let stepFourError = document.getElementById("step-4-error");
+
 
     let lastPassError = 0;
     switch (currentTab) {
@@ -195,6 +205,7 @@ function budgetIsValid() {
             if(isEmpty(budget.meta.userApp.name) ||
                 isEmpty(budget.userApp.email) ||
                 isEmpty(budget.userApp.phone) ||
+                !validatePhone(phone.value) ||
                 // isEmpty(budget.meta.interest) ||
                 isEmpty(budget.estimatedPrice)){
                 stepFourError.style.display = "block";
@@ -309,7 +320,7 @@ function setEmail(e) {
     } else {
         //e.value = "";
         //alert('Este email é inválido!');
-        ga('send', 'event', 'eablender-budget', 'step-'+currentTab+'invalid-email' );
+        ga('send', 'event', 'eablender-budget', 'step-silent-invalid-email' );
     }
 }
 
