@@ -9,7 +9,6 @@ budget.meta.city = new Object();
 
 let currentTab = 0;
 
-
 if(typeof ga !== 'function'){ ga = function(a,b,c,d){ console.log(d) } }
 
 let eablenderUrl = 'http://localhost:8080';
@@ -175,21 +174,22 @@ function budgetIsValid() {
             } else categoryError.style.display = "none";
             break;
         case 2:
-            if (isEmpty(budget.meta) || isEmpty(budget.meta.questions.property_type) || isEmpty(budget.meta.questions.start)) {
+            if (isEmpty(budget.meta) ||
+                isEmpty(budget.meta.questions.property_type) ||
+                isEmpty(budget.meta.questions.start)) {
                 typeError.style.display = "block";
                 valid = false;
             } else typeError.style.display = "none";
             break;
         case 3:
-            if(isEmpty(budget.title) || isEmpty(budget.description) || isEmpty(budget.meta.questions.contact_hour) || isEmpty(budget.meta.questions.person_type)){
+            if(isEmpty(budget.title) || isEmpty(budget.description)){
                 valid = false;
-                stepThreeError.style.display = "block";
-            }
+                stepThreeError.style.display = 'block';
+            } else { stepThreeError.style.display = "none"; }
             titleError.className = isEmpty(budget.title) ? "title-error" : "";
             descriptionError.className = isEmpty(budget.description) ?  "title-error" : "";
             contactError.className = isEmpty(budget.meta.questions.contact_hour) ? "title-error" : "";
             personError.className = isEmpty(budget.meta.questions.person_type) ? "title-error" : "";
-            stepThreeError.style.display = "none";
             break;
         case 4:
             if(isEmpty(budget.meta.userApp.name) ||
@@ -303,12 +303,12 @@ function setName(n) {
 }
 
 function setEmail(e) {
+    budget.meta.userApp.email = e.value;
+    budget.userApp.email = e.value;
     if (/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/.test(e.value)) {
-        budget.meta.userApp.email = e.value;
-        budget.userApp.email = e.value;
     } else {
-        e.value = "";
-        alert('Este email é inválido!');
+        //e.value = "";
+        //alert('Este email é inválido!');
         ga('send', 'event', 'eablender-budget', 'step-'+currentTab+'invalid-email' );
     }
 }
