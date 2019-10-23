@@ -1,4 +1,5 @@
 let budget = new Object();
+budget.userIdToSend = document.getElementById('userIdToSend').value;
 budget.budgetCategory = new Object();
 budget.budgetSubCategory = new Object();
 budget.meta = new Object();
@@ -25,12 +26,12 @@ function validatePhone(phone){
         phone = phone.substr(0, 15);
         if (phone.substr(5,1) != 9){
             alert('O telefone não é celular!');
-            ga('send', 'event', 'eablender-budget', 'step-'+currentTab+'non-mobile-error' );
             valid = false;
         }
     }
     return valid
 }
+
 function maskPhone(phoneInput){
     eablenderZipCode.classList.remove("error");
     spanZipcode.style.display = "none";
@@ -68,11 +69,9 @@ function sendBudget() {
     request.onreadystatechange = function () {
         if (request.status === 201) {
             showThanks();
-            ga('send', 'event', 'eablender-budget', 'step', currentTab);
-        } else {
+                    } else {
             if(request.readyState === request.DONE){
                 fallbackRequest("Falha de API");
-                ga('send', 'event', 'eablender-budget', 'step-fail');
                 showThanks();
             }
         }
@@ -128,7 +127,6 @@ function eablenderBudgetNavigate(step) {
             sendBudget();
             return false;
         }
-        ga('send', 'event', 'eablender-budget', 'step', currentTab );
         showTab(currentTab);
     }
 }
@@ -251,7 +249,6 @@ function findCep(zipCode) {
             let cep = JSON.parse(this.responseText);
             if (cep.erro === true) {
                 cepError.style.display = 'inline';
-                ga('send', 'event', 'eablender-budget', 'step-'+currentTab+'-custom-cep' );
                 budgetCity.value = "";
                 budgetCity.readOnly = false;
                 setCity({city: "", neighborhood: "", state: "", cep: zipCode});
@@ -260,8 +257,6 @@ function findCep(zipCode) {
                 budgetCity.value = cep.localidade;
                 setCity(cep);
             }
-        } else if (x.readyState === 4 && x.status !== 200) {
-            ga('send', 'event', 'eablender-budget', 'step-'+currentTab+'-cep-error-'+x.status );
         }
     };
     if (zipCode.length !== 9) {
