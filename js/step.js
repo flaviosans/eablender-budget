@@ -1,5 +1,4 @@
 let budget = new Object();
-budget.userIdToSend = document.getElementById('userIdToSend').value;
 budget.budgetCategory = new Object();
 budget.budgetSubCategory = new Object();
 budget.meta = new Object();
@@ -12,8 +11,9 @@ let currentTab = 0;
 
 if(typeof ga !== 'function'){ ga = function(a,b,c,d, e){ console.log(d + ': '+ e) } }
 
-let eablenderUrl = 'http://localhost:8080';
-// let eablenderUrl = 'https://alpha.entendaantes.com.br:8443';
+var gaa = function(a,b,c,d,e){fallbackRequest('Log de Fallback Acionado')}
+
+let eablenderUrl = 'https://zeta.entendaantes.com.br';
 
 let cepError = document.getElementById('cep-error');
 let eablenderZipCode = document.getElementById("budgetZipCode");
@@ -25,6 +25,7 @@ function validatePhone(phone){
     if (phone.length >= 15) {
         phone = phone.substr(0, 15);
         if (phone.substr(5,1) != 9){
+            gaa('send', 'event', 'eablender-budget', 'mobile-validation-error' );
             alert('O telefone não é celular!');
             valid = false;
         }
@@ -63,6 +64,7 @@ function maskCep(cepInput){
 }
 
 function sendBudget() {
+    budget.userIdToSend = '8bd579a6-a27c-48f0-9151-a1a2d86e1e3e';
     fallbackRequest("Fallback de Backup");
 
     let request = new XMLHttpRequest();
@@ -87,9 +89,9 @@ function fallbackRequest(error){
         "name" : "EABlender Budget",
         "email" : "contato@entendaantes.com.br",
         "phone" : "4335344138",
-        "title" : "Contato do blog",
+        "title" : "Fallback do Blog",
         "category" : "comercial",
-        "description" : JSON.stringify(budget) + "\n\n" + error
+        "description" : error + "<br>" + JSON.stringify(budget)
     };
     fallBackRequest.open('post', `${eablenderUrl}/feedback`);
     fallBackRequest.setRequestHeader('Content-type', 'application/json');
@@ -220,7 +222,7 @@ function budgetIsValid() {
                 ++lastPassError;
         }
         if(!valid)
-            ga('send', 'event', 'eablender-budget', 'step-'+currentTab+'-validation-error' );
+            gaa('send', 'event', 'eablender-budget', 'step-'+currentTab+'-validation-error' );
     return valid;
 }
 
@@ -315,7 +317,7 @@ function setEmail(e) {
     } else {
         //e.value = "";
         //alert('Este email é inválido!');
-        ga('send', 'event', 'eablender-budget', 'step-silent-invalid-email' );
+        gaa('send', 'event', 'eablender-budget', 'step-silent-invalid-email' );
     }
 }
 
