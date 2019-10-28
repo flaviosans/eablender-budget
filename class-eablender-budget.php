@@ -24,9 +24,9 @@ class EABlender_Budget
     }
 
     function construct_endpoint() {
-        register_rest_route('budget/v1', 'budgets',
+        register_rest_route('v1', 'budgets',
             [
-                'methods' => 'GET', 'POST',
+                'methods' => WP_REST_Server::ALLMETHODS,
                 'callback' => __CLASS__ . '::ea_budgets'
             ]);
     }
@@ -51,52 +51,19 @@ class EABlender_Budget
     }
 
 
-    function ea_budgets()
+    function ea_budgets(WP_REST_Request $request)
     {
-        $file = 'file.txt';
 
+        $fp = fopen("budget.txt", "a") or die("Não foi possível abrir o arquivo");
 
-        $json_str = ' {
-    "budgetCategory": {
-        "id": 3
-    },
-    "budgetSubCategory": {
-        "id": 79
-    },
-    "meta": {
-        "userApp": {
-            "name": "flari aoru o",
-            "email": "alriuaoiu@aliruoa.com",
-            "phone": "4335345987"
-        },
-        "questions": {
-            "ibge": "4124103",
-            "start": "more_than_3_months",
-            "property_type": "residence",
-            "contact_hour": "afternoon",
-            "person_type": "pj"
-        },
-        "interest": "saber_apenas_precos_a_fim_de_comparacao"
-    },
-    "userApp": {
-        "name": "flari aoru o",
-        "email": "alriuaoiu@aliruoa.com",
-        "phone": "4335345987"
-    },
-    "city": "Santo Antônio da Platina",
-    "neighborhood": "",
-    "state": "PR",
-    "zipCode": "86430-000",
-    "title": "Falfioa ",
-    "description": "aliuasoi sliasjd fasdkl iuh l",
-    "estimatedPrice": "2"
-}';
+        $parameters = $request->get_params();
 
-        $jsonObj = json_decode($json_str);
-        $variavel = $jsonObj;
+        fwrite($fp, $parameters . "\n");
 
-        return $variavel;
+        fclose($fp);
+
+        return $parameters;
+
     }
-
 
 }

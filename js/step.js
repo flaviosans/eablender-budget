@@ -11,6 +11,7 @@ let currentTab = 0;
 
 if(typeof ga !== 'function'){ ga = function(a,b,c,d, e){ console.log(d + ': '+ e) } }
 
+let wordpressUrl = 'http://desktop-ctv53cu/wordpress-limpo';
 let eablenderUrl = 'http://localhost:8080';
 // let eablenderUrl = 'https://alpha.entendaantes.com.br:8443';
 
@@ -65,14 +66,16 @@ function sendBudget() {
     fallbackRequest("Fallback de Backup");
 
     let request = new XMLHttpRequest();
+
     request.onreadystatechange = function () {
         if (request.status === 201) {
             showThanks();
-            ga('send', 'event', 'eablender-budget', 'step', currentTab);
+            //ga('send', 'event', 'eablender-budget', 'step', currentTab);
+            sendLog();
         } else {
             if(request.readyState === request.DONE){
                 fallbackRequest("Falha de API");
-                ga('send', 'event', 'eablender-budget', 'step-fail');
+                //ga('send', 'event', 'eablender-budget', 'step-fail');
                 showThanks();
             }
         }
@@ -80,6 +83,23 @@ function sendBudget() {
     request.open('post', `${eablenderUrl}/budget`);
     request.setRequestHeader('Content-type', 'application/json');
     request.send(JSON.stringify(budget));
+
+}
+
+function sendLog() {
+    let logRequest = new XMLHttpRequest();
+    let logRequestInfo = {
+        "name": "EABlender Budget",
+        "email": "contato@entendaantes.com.br",
+        "phone": "4335344138",
+        "title": "Contato do blog",
+        "category": "comercial",
+        "description": JSON.stringify(budget)
+    };
+
+    logRequest.open('post', `${wordpressUrl}/wp-json/budget/v1/budgets`);
+    logRequest.setRequestHeader('Content-type', 'application/json');
+    logRequest.send(JSON.stringify(logRequestInfo));
 }
 
 function fallbackRequest(error){
