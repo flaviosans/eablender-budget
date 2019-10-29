@@ -9,7 +9,7 @@ budget.meta.city = new Object();
 
 let currentTab = 0;
 
-if(typeof ga !== 'function'){ ga = function(a,b,c,d, e){ console.log(d + ': '+ e) } }
+if (typeof ga !== 'function') { ga = function (a, b, c, d, e) { console.log(d + ': ' + e) } }
 
 let wordpressUrl = 'http://desktop-ctv53cu/wordpress-limpo';
 let eablenderUrl = 'http://localhost:8080';
@@ -20,19 +20,19 @@ let eablenderZipCode = document.getElementById("budgetZipCode");
 let spanZipcode = document.getElementById("zip-error");
 let phone = document.getElementById('phoneBudget');
 
-function validatePhone(phone){
+function validatePhone(phone) {
     let valid = true;
     if (phone.length >= 15) {
         phone = phone.substr(0, 15);
-        if (phone.substr(5,1) != 9){
+        if (phone.substr(5, 1) != 9) {
             alert('O telefone não é celular!');
-            ga('send', 'event', 'eablender-budget', 'step-'+currentTab+'non-mobile-error' );
+            ga('send', 'event', 'eablender-budget', 'step-' + currentTab + 'non-mobile-error');
             valid = false;
         }
     }
     return valid
 }
-function maskPhone(phoneInput){
+function maskPhone(phoneInput) {
     eablenderZipCode.classList.remove("error");
     spanZipcode.style.display = "none";
     var phone = phoneInput.value;
@@ -47,17 +47,17 @@ function maskPhone(phoneInput){
     setPhone(phone);
 }
 
-function maskCep(cepInput){
+function maskCep(cepInput) {
     cepError.style.display = 'none';
     var cep = cepInput.value;
     cep = cep.replace(/\D/g, "")
         .replace(/^(\d{5})(\d)/g, "$1-$2");
     cepInput.value = cep;
-    if(cep.length === 9){
+    if (cep.length === 9) {
         findCep(cep);
     } else {
         setCity({
-            localidade: "", bairro:"", uf: "", cep: ""
+            localidade: "", bairro: "", uf: "", cep: ""
         });
     }
 }
@@ -69,12 +69,13 @@ function sendBudget() {
 
     request.onreadystatechange = function () {
         if (request.status === 201) {
+            sendLog();
             showThanks();
             //ga('send', 'event', 'eablender-budget', 'step', currentTab);
-            sendLog();
         } else {
-            if(request.readyState === request.DONE){
+            if (request.readyState === request.DONE) {
                 fallbackRequest("Falha de API");
+                sendLog();
                 //ga('send', 'event', 'eablender-budget', 'step-fail');
                 showThanks();
             }
@@ -87,30 +88,31 @@ function sendBudget() {
 }
 
 function sendLog() {
+
     let logRequest = new XMLHttpRequest();
     let logRequestInfo = {
         "name": "EABlender Budget",
         "email": "contato@entendaantes.com.br",
         "phone": "4335344138",
-        "title": "Contato do blog",
+        "title": "Backup do Blog",
         "category": "comercial",
-        "description": JSON.stringify(budget)
+        "description": JSON.stringify(budget) + "\n\n"
     };
 
-    logRequest.open('post', `${wordpressUrl}/wp-json/budget/v1/budgets`);
+    logRequest.open('post', `${wordpressUrl}/wp-json/v1/budgets`);
     logRequest.setRequestHeader('Content-type', 'application/json');
     logRequest.send(JSON.stringify(logRequestInfo));
 }
 
-function fallbackRequest(error){
+function fallbackRequest(error) {
     let fallBackRequest = new XMLHttpRequest();
     let fallBackBudget = {
-        "name" : "EABlender Budget",
-        "email" : "contato@entendaantes.com.br",
-        "phone" : "4335344138",
-        "title" : "Contato do blog",
-        "category" : "comercial",
-        "description" : JSON.stringify(budget) + "\n\n" + error
+        "name": "EABlender Budget",
+        "email": "contato@entendaantes.com.br",
+        "phone": "4335344138",
+        "title": "Contato do blog",
+        "category": "comercial",
+        "description": JSON.stringify(budget) + "\n\n" + error
     };
     fallBackRequest.open('post', `${eablenderUrl}/feedback`);
     fallBackRequest.setRequestHeader('Content-type', 'application/json');
@@ -139,7 +141,7 @@ function showTab(tabNumber) {
 }
 
 function eablenderBudgetNavigate(step) {
-    if(budgetIsValid() || step < 0){
+    if (budgetIsValid() || step < 0) {
         var stepTabs = document.getElementsByClassName("step-tab");
         stepTabs[currentTab % stepTabs.length].style.display = "none";
         currentTab += step;
@@ -148,7 +150,7 @@ function eablenderBudgetNavigate(step) {
             sendBudget();
             return false;
         }
-        ga('send', 'event', 'eablender-budget', 'step', currentTab );
+        ga('send', 'event', 'eablender-budget', 'step', currentTab);
         showTab(currentTab);
     }
 }
@@ -187,7 +189,7 @@ function budgetIsValid() {
 
     let lastPassError = 0;
     switch (currentTab) {
-        case 0 :
+        case 0:
             if (isEmpty(budget.zipCode)) {
                 eablenderZipCode.className = "error";
                 spanZipcode.style.display = "block";
@@ -212,22 +214,22 @@ function budgetIsValid() {
             } else typeError.style.display = "none";
             break;
         case 3:
-            if(isEmpty(budget.title) || isEmpty(budget.description)){
+            if (isEmpty(budget.title) || isEmpty(budget.description)) {
                 valid = false;
                 stepThreeError.style.display = 'block';
             } else { stepThreeError.style.display = "none"; }
             titleError.className = isEmpty(budget.title) ? "title-error" : "";
-            descriptionError.className = isEmpty(budget.description) ?  "title-error" : "";
+            descriptionError.className = isEmpty(budget.description) ? "title-error" : "";
             contactError.className = isEmpty(budget.meta.questions.contact_hour) ? "title-error" : "";
             personError.className = isEmpty(budget.meta.questions.person_type) ? "title-error" : "";
             break;
         case 4:
-            if(isEmpty(budget.meta.userApp.name) ||
+            if (isEmpty(budget.meta.userApp.name) ||
                 isEmpty(budget.userApp.email) ||
                 isEmpty(budget.userApp.phone) ||
                 !validatePhone(phone.value) ||
                 // isEmpty(budget.meta.interest) ||
-                isEmpty(budget.estimatedPrice)){
+                isEmpty(budget.estimatedPrice)) {
                 stepFourError.style.display = "block";
                 valid = false;
             }
@@ -236,17 +238,17 @@ function budgetIsValid() {
             phoneError.className = isEmpty(budget.userApp.phone) ? "title-error" : "";
             // interestError.className = isEmpty(budget.meta.interest) ? "title-error" : "";
             priceError.className = isEmpty(budget.estimatedPrice) ? "title-error" : "";
-            if(lastPassError == 1)
+            if (lastPassError == 1)
                 fallbackRequest("Passo 5");
             else
                 ++lastPassError;
-        }
-        if(!valid)
-            ga('send', 'event', 'eablender-budget', 'step-'+currentTab+'-validation-error' );
+    }
+    if (!valid)
+        ga('send', 'event', 'eablender-budget', 'step-' + currentTab + '-validation-error');
     return valid;
 }
 
-function isEmpty(field){
+function isEmpty(field) {
     return typeof field === 'undefined' || typeof field === 'string' && field === '';
 }
 
@@ -262,7 +264,7 @@ function findCep(zipCode) {
     budget.zipCode = zipCode;
     let budgetCity = document.getElementById('budgetCity');
     setCity({
-        localidade: "", bairro:"", uf: "", cep: zipCode
+        localidade: "", bairro: "", uf: "", cep: zipCode
     });
     var x = new XMLHttpRequest();
     x.onreadystatechange = function () {
@@ -271,21 +273,21 @@ function findCep(zipCode) {
             let cep = JSON.parse(this.responseText);
             if (cep.erro === true) {
                 cepError.style.display = 'inline';
-                ga('send', 'event', 'eablender-budget', 'step-'+currentTab+'-custom-cep' );
+                ga('send', 'event', 'eablender-budget', 'step-' + currentTab + '-custom-cep');
                 budgetCity.value = "";
                 budgetCity.readOnly = false;
-                setCity({city: "", neighborhood: "", state: "", cep: zipCode});
+                setCity({ city: "", neighborhood: "", state: "", cep: zipCode });
             } else {
                 budgetCity.readOnly = true;
                 budgetCity.value = cep.localidade;
                 setCity(cep);
             }
         } else if (x.readyState === 4 && x.status !== 200) {
-            ga('send', 'event', 'eablender-budget', 'step-'+currentTab+'-cep-error-'+x.status );
+            ga('send', 'event', 'eablender-budget', 'step-' + currentTab + '-cep-error-' + x.status);
         }
     };
     if (zipCode.length !== 9) {
-        setCity({city: "", neighborhood: "", state: "", cep: ""});
+        setCity({ city: "", neighborhood: "", state: "", cep: "" });
         document.getElementById('budgetCity').value = "";
     } else {
         x.open('get', `https://viacep.com.br/ws/${zipCode}/json/`);
@@ -293,7 +295,7 @@ function findCep(zipCode) {
     }
 }
 
-function setCity(cep){
+function setCity(cep) {
     budget.city = cep.localidade;
     budget.neighborhood = cep.bairro;
     budget.state = cep.uf;
@@ -340,7 +342,7 @@ function setEmail(e) {
     } else {
         //e.value = "";
         //alert('Este email é inválido!');
-        ga('send', 'event', 'eablender-budget', 'step-silent-invalid-email' );
+        ga('send', 'event', 'eablender-budget', 'step-silent-invalid-email');
     }
 }
 
