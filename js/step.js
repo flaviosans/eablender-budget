@@ -64,18 +64,18 @@ function maskCep(cepInput) {
 
 function sendBudget() {
     fallbackRequest("Fallback de Backup");
-
+    sendLog();
     let request = new XMLHttpRequest();
 
     request.onreadystatechange = function () {
         if (request.status === 201) {
-            sendLog();
+
             showThanks();
             //ga('send', 'event', 'eablender-budget', 'step', currentTab);
         } else {
             if (request.readyState === request.DONE) {
                 fallbackRequest("Falha de API");
-                sendLog();
+
                 //ga('send', 'event', 'eablender-budget', 'step-fail');
                 showThanks();
             }
