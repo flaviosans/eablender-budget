@@ -87,6 +87,11 @@ function sendBudget() {
 
 }
 
+/**
+ * @description Método para envio de log de backup de orçamentos para uma api externa /wp-json/v1/budgets (wordpress)
+ * @author Jonas Gabriel - jgalmeida1993@gmail.com
+ */
+
 function sendLog() {
 
     let logRequest = new XMLHttpRequest();
