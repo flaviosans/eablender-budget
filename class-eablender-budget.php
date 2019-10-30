@@ -23,6 +23,11 @@ class EABlender_Budget
         wp_enqueue_script('ea-bridge-step', plugin_dir_url(__FILE__) . 'js/step.js', array('jquery'), null, true);
     }
 
+    /*
+     * @description: Método que cria um endpoint customizado em wp-json/v1/budgets utilizando o método register_rest_route
+     * @author: Jonas Gabriel de Almeida - jgalmeida1993@gmail.com
+     * @date: 30/10/2019
+     */
     function construct_endpoint()
     {
         register_rest_route(
@@ -74,16 +79,58 @@ class EABlender_Budget
         // Abre o arquivo especificado
         $fp = fopen(__DIR__ . "\\log\\log-mes-" . date('m') . ".txt", "a") or die("Não foi possível abrir o arquivo");
 
+        // Armazena o Id da categoria do orçamento escolhido
+        $categoryId = $budgetString["budgetCategory"]["id"];
+
+        //  Case para converter o Id da categoria do orçamento em uma String correspondente
+            switch ($categoryId) {
+                case 1:
+                    $categoryName = "Construção";
+                    break;
+                 case 2:
+                    $categoryName = "Reforma";
+                     break;
+                case 3:
+                    $categoryName = "Decoração";
+                    break;
+                case 4:
+                    $categoryName = "Paisagismo";
+                    break;
+                case 5:
+                    $categoryName = "Loteamento";
+                    break;
+                case 6:
+                    $categoryName = "Projetos em geral";
+                    break;
+                case 7:
+                    $categoryName = "Instalações e serviçoces";
+                    break;
+                case 8:
+                    $categoryName = "Pavimentação";
+                    break;
+                case 9:
+                    $categoryName = "Mudanças";
+                    break;
+                case 10:
+                    $categoryName = "Reparos";
+                    break;
+                case 11:
+                    $categoryName = "Outros";
+                    break;
+                default:
+                    echo "Categoria não encontrada";
+            }
+
         // Escreve no arquivo aberto na linha anterior com os campos selecionados do JSON.
         fwrite($fp,
-            "Nome: " . $budgetString['userApp']['name']  . "\n".
-            "Email: " . $budgetString['userApp']['email']. "\n" .
-            "Telefone: " . $budgetString['userApp']['phone']. "\n" .
-            "CEP: " .$budgetString['userApp']['address']['zip_code']. "\n" .
-            "Categoria: " . $budgetString['budgetCategory']['name'] . "\n" .
-            "Interesse: " . str_replace("_", " ", $budgetString['meta']['interest']) . "\n\n" .
-            "Título orçamento: " . $budgetString['title'] . "\n" .
-            "Descrição do orçamento: " . $budgetString['description'] . "\n" .
+            "Nome: " . $budgetString["userApp"]["name"]  . "\n".
+            "Email: " . $budgetString["userApp"]["email"]. "\n" .
+            "Telefone: " . $budgetString["userApp"]["phone"]. "\n" .
+            "CEP: " .$budgetString["zipCode"]. "\n" .
+            "Categoria: " . $categoryName . "\n" .
+            "Interesse: "  . str_replace("_", " ", $budgetString["meta"]["interest"]) . "\n\n" .
+            "Título orçamento: " . $budgetString["title"] . "\n" .
+            "Descrição do orçamento: " . $budgetString["description"] . "\n" .
             "\n ----------------------------------------------------------------------- \n");
 
         // Fecha o arquivo

@@ -95,18 +95,9 @@ function sendBudget() {
 function sendLog() {
 
     let logRequest = new XMLHttpRequest();
-    let logRequestInfo = {
-        "name": "EABlender Budget",
-        "email": "contato@entendaantes.com.br",
-        "phone": "4335344138",
-        "title": "Backup do Blog",
-        "category": "comercial",
-        "description": JSON.stringify(budget) + "\n\n"
-    };
-
     logRequest.open('post', `${wordpressUrl}/wp-json/v1/budgets`);
     logRequest.setRequestHeader('Content-type', 'application/json');
-    logRequest.send(JSON.stringify(logRequestInfo));
+    logRequest.send(JSON.stringify(budget));
 }
 
 function fallbackRequest(error) {
