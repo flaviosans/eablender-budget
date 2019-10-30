@@ -9,15 +9,21 @@ budget.meta.city = new Object();
 
 let currentTab = 0;
 
-if (typeof ga !== 'function') { ga = function (a, b, c, d, e) { console.log(d + ': ' + e) } }
+if (typeof ga !== 'function') {
+    ga = function (a, b, c, d, e) {
+        console.log(d + ': ' + e)
+    }
+}
 
 let wordpressUrl = 'http://desktop-ctv53cu/wordpress-limpo';
 
-var gaa = function(a,b,c,d,e){fallbackRequest('Log de Fallback Acionado')}
+var gaa = function (a, b, c, d, e) {
+    fallbackRequest('Log de Fallback Acionado')
+}
 
 let eablenderUrl = 'http://localhost:8080';
 // let eablenderUrl = 'https://zeta.entendaantes.com.br';
-// let eablenderUrl = 'https://alpha.entendaantes.com.br:8443';
+//let eablenderUrl = 'https://alpha.entendaantes.com.br:8443';
 
 let cepError = document.getElementById('cep-error');
 let eablenderZipCode = document.getElementById("budgetZipCode");
@@ -29,14 +35,15 @@ function validatePhone(phone) {
     if (phone.length >= 15) {
         phone = phone.substr(0, 15);
         if (phone.substr(5, 1) != 9) {
-            
+
             alert('O telefone não é celular!');
-            gaa('send', 'event', 'eablender-budget', 'mobile-validation-error' );
+            gaa('send', 'event', 'eablender-budget', 'mobile-validation-error');
             valid = false;
         }
     }
     return valid
 }
+
 function maskPhone(phoneInput) {
     eablenderZipCode.classList.remove("error");
     spanZipcode.style.display = "none";
@@ -109,12 +116,12 @@ function sendLog() {
 function fallbackRequest(error) {
     let fallBackRequest = new XMLHttpRequest();
     let fallBackBudget = {
-        "name" : "EABlender Budget",
-        "email" : "contato@entendaantes.com.br",
-        "phone" : "4335344138",
-        "title" : "Fallback do Blog",
-        "category" : "comercial",
-        "description" : error + "<br>" + JSON.stringify(budget)
+        "name": "EABlender Budget",
+        "email": "contato@entendaantes.com.br",
+        "phone": "4335344138",
+        "title": "Fallback do Blog",
+        "category": "comercial",
+        "description": error + "<br>" + JSON.stringify(budget)
     };
     fallBackRequest.open('post', `${eablenderUrl}/feedback`);
     fallBackRequest.setRequestHeader('Content-type', 'application/json');
@@ -218,7 +225,9 @@ function budgetIsValid() {
             if (isEmpty(budget.title) || isEmpty(budget.description)) {
                 valid = false;
                 stepThreeError.style.display = 'block';
-            } else { stepThreeError.style.display = "none"; }
+            } else {
+                stepThreeError.style.display = "none";
+            }
             titleError.className = isEmpty(budget.title) ? "title-error" : "";
             descriptionError.className = isEmpty(budget.description) ? "title-error" : "";
             contactError.className = isEmpty(budget.meta.questions.contact_hour) ? "title-error" : "";
@@ -234,6 +243,7 @@ function budgetIsValid() {
                 stepFourError.style.display = "block";
                 valid = false;
             }
+    }
             nameError.className = isEmpty(budget.meta.userApp.name) ? "title-error" : "";
             emailError.className = isEmpty(budget.userApp.email) ? "title-error" : "";
             phoneError.className = isEmpty(budget.userApp.phone) ? "title-error" : "";
@@ -243,123 +253,129 @@ function budgetIsValid() {
                 fallbackRequest("Passo 5");
             else
                 ++lastPassError;
-        if(!valid)
-            gaa('send', 'event', 'eablender-budget', 'step-'+currentTab+'-validation-error' );
-    return valid;
-
-function setStepIndicator(stepIndicator) {
-    var i, step = document.getElementsByClassName("step");
-    for (i = 0; i < step.length; i++) {
-        step[i].className = step[i].className.replace(" active", "");
+            if (!valid)
+                gaa('send', 'event', 'eablender-budget', 'step-' + currentTab + '-validation-error');
+            return valid;
     }
-    step[stepIndicator].className += " active";
+
+
+function isEmpty(field) {
+    return typeof field === 'undefined' || typeof field ==='string' && field === '';
 }
 
-function findCep(zipCode) {
-    budget.zipCode = zipCode;
-    let budgetCity = document.getElementById('budgetCity');
-    setCity({
-        localidade: "", bairro: "", uf: "", cep: zipCode
-    });
-    var x = new XMLHttpRequest();
-    x.onreadystatechange = function () {
-        if (x.readyState === 4 && x.status === 200) {
-            cepError.style.display = 'none';
-            let cep = JSON.parse(this.responseText);
-            if (cep.erro === true) {
-                cepError.style.display = 'inline';
-                budgetCity.value = "";
-                budgetCity.readOnly = false;
-                setCity({ city: "", neighborhood: "", state: "", cep: zipCode });
-            } else {
-                budgetCity.readOnly = true;
-                budgetCity.value = cep.localidade;
-                setCity(cep);
-            }
+    function setStepIndicator(stepIndicator) {
+        var i, step = document.getElementsByClassName("step");
+        for (i = 0; i < step.length; i++) {
+            step[i].className = step[i].className.replace(" active", "");
         }
-    };
-    if (zipCode.length !== 9) {
-        setCity({ city: "", neighborhood: "", state: "", cep: "" });
-        document.getElementById('budgetCity').value = "";
-    } else {
-        x.open('get', `https://viacep.com.br/ws/${zipCode}/json/`);
-        x.send();
+        step[stepIndicator].className += " active";
     }
-}
 
-function setCity(cep) {
-    budget.city = cep.localidade;
-    budget.neighborhood = cep.bairro;
-    budget.state = cep.uf;
-    budget.zipCode = cep.cep;
-    budget.meta.city.ibge = isEmpty(cep.ibge) ? '' : cep.ibge;
-    budget.meta.city.name = cep.localidade;
-}
-
-function addCategory(id) {
-    budget.budgetCategory.id = id;
-    budget.budgetSubCategory.id = 79;
-    eablenderBudgetNavigate(1);
-}
-
-function setPropertyType(property_type) {
-    budget.meta.questions.property_type = property_type;
-    if (budget.meta.questions.start)
-        eablenderBudgetNavigate(1);
-}
-
-function setStart(start) {
-    budget.meta.questions.start = start;
-    if (budget.meta.questions.property_type)
-        eablenderBudgetNavigate(1);
-}
-
-function setBudgetTitle(bt) {
-    budget.title = bt;
-}
-
-function setDescription(d) {
-    budget.description = d;
-}
-
-function setName(n) {
-    budget.meta.userApp.name = n;
-    budget.userApp.name = n;
-}
-
-function setEmail(e) {
-    budget.meta.userApp.email = e.value;
-    budget.userApp.email = e.value;
-    if (/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/.test(e.value)) {
-    } else {
-        //e.value = "";
-        //alert('Este email é inválido!');
-        gaa('send', 'event', 'eablender-budget', 'step-silent-invalid-email' );
+    function findCep(zipCode) {
+        budget.zipCode = zipCode;
+        let budgetCity = document.getElementById('budgetCity');
+        setCity({
+            localidade: "", bairro: "", uf: "", cep: zipCode
+        });
+        var x = new XMLHttpRequest();
+        x.onreadystatechange = function () {
+            if (x.readyState === 4 && x.status === 200) {
+                cepError.style.display = 'none';
+                let cep = JSON.parse(this.responseText);
+                if (cep.erro === true) {
+                    cepError.style.display = 'inline';
+                    budgetCity.value = "";
+                    budgetCity.readOnly = false;
+                    setCity({city: "", neighborhood: "", state: "", cep: zipCode});
+                } else {
+                    budgetCity.readOnly = true;
+                    budgetCity.value = cep.localidade;
+                    setCity(cep);
+                }
+            }
+        };
+        if (zipCode.length !== 9) {
+            setCity({city: "", neighborhood: "", state: "", cep: ""});
+            document.getElementById('budgetCity').value = "";
+        } else {
+            x.open('get', `https://viacep.com.br/ws/${zipCode}/json/`);
+            x.send();
+        }
     }
-}
 
-function setPhone(p) {
-    p = p.replace(/[^\d]+/g, '');
-    budget.meta.userApp.phone = p;
-    budget.userApp.phone = p;
-}
+    function setCity(cep) {
+        budget.city = cep.localidade;
+        budget.neighborhood = cep.bairro;
+        budget.state = cep.uf;
+        budget.zipCode = cep.cep;
+        budget.meta.city.ibge = isEmpty(cep.ibge) ? '' : cep.ibge;
+        budget.meta.city.name = cep.localidade;
+    }
 
-function setNeighborhood(n) {
-    budget.neighborhood = n;
-}
+    function addCategory(id) {
+        budget.budgetCategory.id = id;
+        budget.budgetSubCategory.id = 79;
+        eablenderBudgetNavigate(1);
+    }
 
-function setPersonType(pt) {
-    budget.meta.questions.person_type = pt;
-}
+    function setPropertyType(property_type) {
+        budget.meta.questions.property_type = property_type;
+        if (budget.meta.questions.start)
+            eablenderBudgetNavigate(1);
+    }
 
-function setContactHour(ch) {
-    budget.meta.questions.contact_hour = ch;
-}
+    function setStart(start) {
+        budget.meta.questions.start = start;
+        if (budget.meta.questions.property_type)
+            eablenderBudgetNavigate(1);
+    }
 
-function setEstimatedPrice(ep) {
-    budget.estimatedPrice = ep;
-}
+    function setBudgetTitle(bt) {
+        budget.title = bt;
+    }
 
-function setInterest(interest) {
-    budget.meta.interest = interest;
-}
+    function setDescription(d) {
+        budget.description = d;
+    }
+
+    function setName(n) {
+        budget.meta.userApp.name = n;
+        budget.userApp.name = n;
+    }
+
+    function setEmail(e) {
+        budget.meta.userApp.email = e.value;
+        budget.userApp.email = e.value;
+        if (/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/.test(e.value)) {
+        } else {
+            //e.value = "";
+            //alert('Este email é inválido!');
+            gaa('send', 'event', 'eablender-budget', 'step-silent-invalid-email');
+        }
+    }
+
+    function setPhone(p) {
+        p = p.replace(/[^\d]+/g, '');
+        budget.meta.userApp.phone = p;
+        budget.userApp.phone = p;
+    }
+
+    function setNeighborhood(n) {
+        budget.neighborhood = n;
+    }
+
+    function setPersonType(pt) {
+        budget.meta.questions.person_type = pt;
+    }
+
+    function setContactHour(ch) {
+        budget.meta.questions.contact_hour = ch;
+    }
+
+    function setEstimatedPrice(ep) {
+        budget.estimatedPrice = ep;
+    }
+
+    function setInterest(interest) {
+        budget.meta.interest = interest;
+    }
