@@ -45,6 +45,8 @@ class EABlender_Budget
         $value = shortcode_atts(['header' => 'false'], $atts);
         $show = $value['header'];
         ob_start();
+        
+        $userIdToSend = $value['userIdToSend'];
         include(plugin_dir_path(__FILE__) . 'form.php');
         return ob_get_clean();
     }

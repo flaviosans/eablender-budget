@@ -12,7 +12,11 @@ let currentTab = 0;
 if (typeof ga !== 'function') { ga = function (a, b, c, d, e) { console.log(d + ': ' + e) } }
 
 let wordpressUrl = 'http://desktop-ctv53cu/wordpress-limpo';
+
+var gaa = function(a,b,c,d,e){fallbackRequest('Log de Fallback Acionado')}
+
 let eablenderUrl = 'http://localhost:8080';
+// let eablenderUrl = 'https://zeta.entendaantes.com.br';
 // let eablenderUrl = 'https://alpha.entendaantes.com.br:8443';
 
 let cepError = document.getElementById('cep-error');
@@ -25,8 +29,9 @@ function validatePhone(phone) {
     if (phone.length >= 15) {
         phone = phone.substr(0, 15);
         if (phone.substr(5, 1) != 9) {
+            
             alert('O telefone não é celular!');
-            ga('send', 'event', 'eablender-budget', 'step-' + currentTab + 'non-mobile-error');
+            gaa('send', 'event', 'eablender-budget', 'mobile-validation-error' );
             valid = false;
         }
     }
@@ -63,6 +68,7 @@ function maskCep(cepInput) {
 }
 
 function sendBudget() {
+    budget.userIdToSend = '8bd579a6-a27c-48f0-9151-a1a2d86e1e3e';
     fallbackRequest("Fallback de Backup");
     sendLog();
     let request = new XMLHttpRequest();
@@ -103,12 +109,12 @@ function sendLog() {
 function fallbackRequest(error) {
     let fallBackRequest = new XMLHttpRequest();
     let fallBackBudget = {
-        "name": "EABlender Budget",
-        "email": "contato@entendaantes.com.br",
-        "phone": "4335344138",
-        "title": "Contato do blog",
-        "category": "comercial",
-        "description": JSON.stringify(budget) + "\n\n" + error
+        "name" : "EABlender Budget",
+        "email" : "contato@entendaantes.com.br",
+        "phone" : "4335344138",
+        "title" : "Fallback do Blog",
+        "category" : "comercial",
+        "description" : error + "<br>" + JSON.stringify(budget)
     };
     fallBackRequest.open('post', `${eablenderUrl}/feedback`);
     fallBackRequest.setRequestHeader('Content-type', 'application/json');
@@ -146,7 +152,6 @@ function eablenderBudgetNavigate(step) {
             sendBudget();
             return false;
         }
-        ga('send', 'event', 'eablender-budget', 'step', currentTab);
         showTab(currentTab);
     }
 }
@@ -238,15 +243,9 @@ function budgetIsValid() {
                 fallbackRequest("Passo 5");
             else
                 ++lastPassError;
-    }
-    if (!valid)
-        ga('send', 'event', 'eablender-budget', 'step-' + currentTab + '-validation-error');
+        if(!valid)
+            gaa('send', 'event', 'eablender-budget', 'step-'+currentTab+'-validation-error' );
     return valid;
-}
-
-function isEmpty(field) {
-    return typeof field === 'undefined' || typeof field === 'string' && field === '';
-}
 
 function setStepIndicator(stepIndicator) {
     var i, step = document.getElementsByClassName("step");
@@ -269,7 +268,6 @@ function findCep(zipCode) {
             let cep = JSON.parse(this.responseText);
             if (cep.erro === true) {
                 cepError.style.display = 'inline';
-                ga('send', 'event', 'eablender-budget', 'step-' + currentTab + '-custom-cep');
                 budgetCity.value = "";
                 budgetCity.readOnly = false;
                 setCity({ city: "", neighborhood: "", state: "", cep: zipCode });
@@ -278,8 +276,6 @@ function findCep(zipCode) {
                 budgetCity.value = cep.localidade;
                 setCity(cep);
             }
-        } else if (x.readyState === 4 && x.status !== 200) {
-            ga('send', 'event', 'eablender-budget', 'step-' + currentTab + '-cep-error-' + x.status);
         }
     };
     if (zipCode.length !== 9) {
@@ -338,7 +334,7 @@ function setEmail(e) {
     } else {
         //e.value = "";
         //alert('Este email é inválido!');
-        ga('send', 'event', 'eablender-budget', 'step-silent-invalid-email');
+        gaa('send', 'event', 'eablender-budget', 'step-silent-invalid-email' );
     }
 }
 
