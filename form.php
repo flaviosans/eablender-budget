@@ -174,6 +174,7 @@ $plugin_path = plugin_dir_url(__FILE__);
 
 <div class="container">
     <div class="step-tab w3-animate-opacity">
+        <input type="hidden" name="userIdToSend" id="userIdToSend" value="<?php echo $userIdToSend ?>">
         <div class="form-group">
             <label for="budgetZipCode" class="control-label required"><i class="fas fa-map-marked-alt eablender-icon">&nbsp;</i>Insira
                 seu
@@ -212,8 +213,8 @@ $plugin_path = plugin_dir_url(__FILE__);
                 <div class="row">
                     <div class="col-12">
                         <div class="radio">
-                            <label><input type="radio" name="optradio"
-                                          onclick="addCategory(1)">Construção</label>
+                            <label>
+                            <input type="radio" name="optradio" onclick="addCategory(1)">Construção</label>
                         </div>
                         <div class="radio">
                             <label><input type="radio" name="optradio" onclick="addCategory(2)">Reforma</label>
