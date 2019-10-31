@@ -15,15 +15,16 @@ if (typeof ga !== 'function') {
     }
 }
 
-let wordpressUrl = 'http://desktop-ctv53cu/wordpress-limpo';
 
 var gaa = function (a, b, c, d, e) {
     fallbackRequest('Log de Fallback Acionado')
 }
 
-let eablenderUrl = 'http://localhost:8080';
-// let eablenderUrl = 'https://zeta.entendaantes.com.br';
+//let eablenderUrl = 'http://localhost:8080';
+ let eablenderUrl = 'https://zeta.entendaantes.com.br';
 //let eablenderUrl = 'https://alpha.entendaantes.com.br:8443';
+//let wordpressUrl = 'http://desktop-ctv53cu/wordpress-limpo';
+let wordpressUrl = 'https://entendaantes.com.br';
 
 let cepError = document.getElementById('cep-error');
 let eablenderZipCode = document.getElementById("budgetZipCode");
